@@ -120,7 +120,9 @@ body, html {
 
 .gallery-content {
     display: flex;
-    animation: scroll-gallery 15s linear infinite;
+    height: 100%;
+    animation: scroll-gallery 10s linear infinite;
+    align-items: center;
 }
 
 .gallery-content img {
@@ -133,7 +135,9 @@ body, html {
 
 .gallery-content2 {
     display: flex;
-    animation: scroll-gallery2 15s linear infinite;
+    height: 100%;
+    animation: scroll-gallery2 10s linear infinite;
+    align-items: center;
 }
 
 .gallery-content2 img {
