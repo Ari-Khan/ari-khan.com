@@ -1,0 +1,160 @@
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: hsl(0, 0%, 100%);
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    border-bottom: 5px solid rgb(150, 200, 255);
+    z-index: 3;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    display: block;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 26px 75px 15px 75px;
+    text-decoration: none;
+    opacity: 0.75;
+    font-size: 24px;
+    font-family: 'Poppins', serif;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.logo {
+    font-family: 'Foldit', sans-serif;
+    font-size: 36px;
+    padding: 20px 200px 0 150px;
+}
+
+.image-container {
+    width: 1540px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+}
+
+.shadow-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    pointer-events: none;
+}
+
+.slide-in-text {
+    font-size: 80px;
+    font-family: "Poppins", sans-serif;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    animation: slide-in 2s forwards;
+    margin-top: 4px;
+}
+
+.slide-in-text-small {
+    font-size: 56px;
+    font-family: "Poppins", sans-serif;
+    padding-bottom: 4px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    animation: slide-in 1.75s forwards;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(-150%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+.scrolling-gallery {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 300px;
+    position: relative;
+    align-items: center;
+}
+
+.gallery-content {
+    display: flex;
+    height: 100%;
+    animation: scroll-gallery 10s linear infinite;
+    align-items: center;
+}
+
+.gallery-content img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-right: 0px;
+}
+
+.gallery-content2 {
+    display: flex;
+    height: 100%;
+    animation: scroll-gallery 10s linear infinite;
+    align-items: center;
+}
+
+.gallery-content2 img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-right: 0px;
+}
+
+@keyframes scroll-gallery {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+
+
