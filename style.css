@@ -1,19 +1,29 @@
+/* Body */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+/* Navigation Bar */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: hsl(0, 0%, 100%);
+    border-bottom: 5px solid rgb(50, 100, 200);
+    z-index: 3;
+}
+
 nav ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: hsl(0, 0%, 100%);
-}
-
-nav {
-    position: fixed;
-    width: 100%;
-    left: 0;
-    top: 0;
-    text-align: center;
-    border-bottom: 5px solid rgb(50, 100, 200);
-    z-index: 3;
 }
 
 nav ul li {
@@ -23,27 +33,15 @@ nav ul li {
 nav ul li a {
     display: block;
     color: rgb(0, 0, 0);
-    text-align: center;
-    padding: 28px 75px 15px 75px;
+    padding: 28px 75px;
+    font-size: 24px;
     text-decoration: none;
     opacity: 0.8;
-    font-size: 24px;
-    font-family: 'Poppins', serif;
+    font-family: 'Poppins', sans-serif;
 }
 
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    height: 100%;
-}
-
-.logo {
-    font-family: 'Foldit', sans-serif;
-    font-size: 42px;
-    padding: 20px 200px 0 150px;
-}
-
+/* Logo Containers */
+.logo,
 .bottom-logo {
     font-family: 'Foldit', sans-serif;
     font-size: 42px;
@@ -51,10 +49,10 @@ body, html {
     opacity: 0.8;
 }
 
+/* Logo Container Box */
 .logo-container {
-    background-color: #ffffff;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    background-color: #fff;
+    padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     max-width: 550px;
@@ -62,30 +60,31 @@ body, html {
     text-align: center;
 }
 
+/* Divider Line */
 .thin-line {
     height: 1px;
-    background-color: #ffffff;
+    background-color: #ccc;
     margin: 10px auto;
     width: 80%;
 }
 
-
+/* Image and Video Containers */
 .image-container {
-    width: 1540px;
+    width: 100%;
     height: 580px;
     overflow: hidden;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
-.image-container img {
+.image-container img,
+.image-container video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top;
-    display: block;
 }
 
 .shadow-overlay {
@@ -98,6 +97,7 @@ body, html {
     pointer-events: none;
 }
 
+/* Text Overlays */
 .text-overlay {
     position: absolute;
     top: 55%;
@@ -107,81 +107,46 @@ body, html {
     pointer-events: none;
 }
 
-.slide-in-text {
-    font-size: 80px;
+.slide-in-text,
+.slide-in-text-small {
     font-family: "Poppins", sans-serif;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.slide-in-text {
+    font-size: 80px;
     animation: slide-in 2s forwards;
     margin-top: 4px;
 }
 
 .slide-in-text-small {
     font-size: 56px;
-    font-family: "Poppins", sans-serif;
     padding-bottom: 4px;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     animation: slide-in 1.75s forwards;
 }
 
-@keyframes slide-in {
-    from {
-        transform: translateX(-150%);
-    }
-    to {
-        transform: translateX(0%);
-    }
-}
-
+/* Scrolling Gallery */
 .scrolling-gallery {
     display: flex;
     overflow: hidden;
     width: 100%;
     height: 300px;
-    position: relative;
-    white-space: nowrap;
     align-items: center;
+    white-space: nowrap;
 }
 
-.gallery-content {
+.gallery-content,
+.gallery-content2 {
     display: flex;
     height: 100%;
     animation: scroll-gallery 30s linear infinite;
     align-items: center;
 }
 
-.gallery-content img {
-    height: 100%;
-    width: auto;
-    object-fit: cover;
-    flex-shrink: 0;
-    margin-right: 10px;
-}
-
-.gallery-content video {
-    height: 100%;
-    width: auto;
-    object-fit: cover;
-    flex-shrink: 0;
-    margin-right: 10px;
-}
-
-.gallery-content2 {
-    display: flex;
-    height: 100%;
-    animation: scroll-gallery2 30s linear infinite;
-    align-items: center;
-}
-
-.gallery-content2 img {
-    height: 100%;
-    width: auto;
-    object-fit: cover;
-    flex-shrink: 0;
-    margin-right: 10px;
-}
-
+.gallery-content img,
+.gallery-content video,
+.gallery-content2 img,
 .gallery-content2 video {
     height: 100%;
     width: auto;
@@ -208,6 +173,7 @@ body, html {
     }
 }
 
+/* Footer */
 footer {
     background-color: rgb(50, 100, 200);
     color: white;
@@ -218,7 +184,6 @@ footer {
 
 footer a {
     color: rgb(50, 100, 200);
-    font-family: "Poppins", sans-serif;
     text-decoration: none;
 }
 
