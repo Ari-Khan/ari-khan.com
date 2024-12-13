@@ -60,6 +60,22 @@ nav ul li a {
     text-align: center;
 }
 
+.header {
+    font-family: "Poppins", sans-serif;
+    font-size: 42px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.foreword {
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    line-height: 2;
+    font-weight: 50;
+    text-align: left;
+    padding-left: 100px;
+}
+
 /* Divider Line */
 .thin-line {
     height: 1px;
@@ -93,7 +109,7 @@ nav ul li a {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.20);
     pointer-events: none;
 }
 
@@ -126,6 +142,15 @@ nav ul li a {
     animation: slide-in 1.75s forwards;
 }
 
+@keyframes slide-in {
+    from {
+        transform: translateX(-140%);
+    }
+    to {
+        transform: translateX(10%);
+    }
+}
+
 /* Scrolling Gallery */
 .scrolling-gallery {
     display: flex;
@@ -140,7 +165,7 @@ nav ul li a {
 .gallery-content2 {
     display: flex;
     height: 100%;
-    animation: scroll-gallery 30s linear infinite;
+    animation: scroll-gallery 35s linear infinite;
     align-items: center;
 }
 
