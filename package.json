@@ -2,6 +2,7 @@
   "name": "ari-khan.com",
   "version": "1.0.0",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,7 +16,6 @@
   "license": "MIT",
   "description": "ari-khan.com website program.",
   "dependencies": {
-    "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

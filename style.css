@@ -274,7 +274,7 @@ input[type="email"] {
 }
 
 button {
-    background-color: rgb(25, 100, 250);
+    background-color: rgb(250, 215, 0);
     color: white;
     padding: 15px;
     width: 100%;
@@ -288,7 +288,7 @@ button {
 }
 
 button:hover {
-    background-color: rgb(25, 50, 200);
+    background-color: rgb(210, 170, 0);
 }
 
 #message {
@@ -297,3 +297,30 @@ button:hover {
     font-family: "Poppins", sans-serif;
     margin-top: 15px;
 }
+
+.main-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    max-width: 400px;
+  }
+  
+  #fade-text {
+    margin: auto;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+    opacity: 0;
+    transition: opacity 1s ease;
+    display: inline-block;
+    white-space: nowrap;
+  }
