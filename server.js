@@ -23,6 +23,7 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(__dirname));
 
 app.use('/assets', express.static(path.join(__dirname, 'content/assets')));
+app.use('/gallery', express.static(path.join(__dirname, 'content/gallery')));
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./content/main.html"));
