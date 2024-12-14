@@ -1,13 +1,13 @@
 {
   "name": "ari-khan.com",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "next build",
-    "start": "next start",
-    "dev": "next dev"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo \"No build step required for Express\""
   },
   "keywords": [
     "website",
