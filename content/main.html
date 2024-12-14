@@ -10,9 +10,6 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@650&family=Poppins:wght@500&display=swap" rel="stylesheet">
-        <link rel="preload" href="./gallery/video1.mp4" as="video">
-        <link rel="preload" href="./gallery/video2.mp4" as="video">
-        <link rel="preload" href="./assets/gumballs.png" as="img">
     </head>
 
     <body>
@@ -27,8 +24,10 @@
             </ul>
         </nav>
 
+        <div class="spacer"></div>
+
         <div class="image-container">
-            <img src="./assets/gumballs.png" alt="Backdrop Image.">
+            <img preload="auto" src="./assets/gumballs.png" alt="Backdrop Image.">
             <div class="shadow-overlay"></div>
             <div class="text-overlay">
                 <div class="slide-in-text-small">A place for</div>
@@ -93,14 +92,20 @@
 
         <div class="main-content">
             <div class="container">
-              <h2>Join Our Mailing List</h2>
-              <input type="email" id="email" placeholder="Enter your email" required />
-              <button onclick="subscribe()">Subscribe</button>
-              <p id="message"></p>
-            </div>
+                <h2>Join Our Mailing List</h2>
+        
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="4889497e-d2be-4a64-8e86-da2420c8d47c">
+                    <input type="email" name="email" placeholder="Enter your email" class="input-field" required>
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    <button type="submit" class="submit-btn">Submit Form</button>
+                </form>
+        
+                <p id="message" class="form-message"></p>
+            </div>              
         
             <div id="fade-text" class="fade-text">Find Innovation</div>
-          </div>
+        </div>
 
         <script src="./assets/script.js"></script>
 

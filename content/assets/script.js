@@ -11,46 +11,41 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-async function subscribe() {
-    const email = document.getElementById('email').value;
-    const messageEl = document.getElementById('message');
-
-    if (!email || !email.includes('@')) {
-        messageEl.innerText = "Please enter a valid email address containing '@'.";
-        messageEl.style.color = "red";
-        return;
-    }
-
-    try {
-        const response = await fetch('http://localhost:5000/subscribe', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email }),
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            messageEl.innerText = result.message;
-            messageEl.style.color = "green";
-            document.getElementById('email').value = '';
-        } else {
-            messageEl.innerText = result.message || "Subscription failed!";
-            messageEl.style.color = "red";
-        }
-    } catch (error) {
-        console.error("Server Error:", error);
-        messageEl.innerText = "Unable to connect to the server.";
-        messageEl.style.color = "red";
-    }
-}
-
 const firstWords = ["Discover", "Explore", "Embrace", "Uncover", "Achieve", "Ari"];
 const secondWords = ["Innovation", "Creativity", "Success", "Leadership", "Vision", "Khan"];
 const colors = ["#FF5733", "#33FF57", "#1964FA", "#FF33A8", "#FAD700", "#1964FA"];
 const fadeTextEl = document.getElementById('fade-text');
 
 let index = 0;
+
+function subscribe() {
+    const emailInput = document.getElementById('email');
+    const email = emailInput.value;
+  
+    const data = {
+      email: email,
+    };
+  
+    const url = 'https://script.google.com/macros/s/AKfycby-r3GNsIx91GrniN-lrNzcGZWEI9lF1Q-i-8YRGxc-5Pi4b0DUqHopK9FXpbYSqZpvAA/exec';
+  
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        console.log('Server Response:', res);
+        document.getElementById('message').innerText = res.message || 'Subscription Successful!';
+      })
+      .catch((error) => {
+        console.error('Subscription Error:', error);
+        document.getElementById('message').innerText = 'An error occurred while subscribing!';
+      });
+  }
+  
 
 function fadeEffect() {
   fadeTextEl.style.opacity = 0;
