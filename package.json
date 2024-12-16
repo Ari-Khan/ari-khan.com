@@ -19,7 +19,6 @@
   "license": "CC-BY-NC-4.0",
   "description": "ari-khan.com website program.",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.21.2",
     "next": "^15.1.0",
     "react": "^19.0.0",
