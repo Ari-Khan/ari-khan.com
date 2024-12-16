@@ -16,11 +16,11 @@ app.use("/gallery", express.static(path.join(__dirname, "content/gallery")));
 app.use("/", express.static(path.join(__dirname, "content")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "./content/main.html"));
+  res.sendFile(path.join(__dirname, "./content/index.html"));
 });
 
-app.get("/main.html", (req, res) => {
-  res.sendFile(path.join(__dirname, "./content/main.html"));
+app.get("/index.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "./content/index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
