@@ -125,6 +125,18 @@ nav ul li a:hover {
     max-width: 1200px;
 }
 
+.legal, .legallist {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+  
+.slide-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+  
+
 .hover-underline {
     text-decoration: none;
     color: inherit;
@@ -195,6 +207,7 @@ nav ul li a:hover {
     font-family: "Poppins", sans-serif;
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    opacity: 0;
 }
 
 .slide-in-text {
@@ -211,11 +224,14 @@ nav ul li a:hover {
 @keyframes slide-in {
     from {
         transform: translateX(-140%);
+        opacity: 0;
     }
     to {
         transform: translateX(10%);
+        opacity: 1;
     }
 }
+
 
 /* Scrolling Gallery */
 .scrolling-gallery {
