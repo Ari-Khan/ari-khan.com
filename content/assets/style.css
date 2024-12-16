@@ -350,9 +350,9 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 20px;
-  }
+}
   
-  .container {
+.container {
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -360,9 +360,9 @@ button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     max-width: 400px;
-  }
+}
   
-  #fade-text {
+#fade-text {
     margin: auto;
     font-family: "Poppins", sans-serif;
     font-weight: bold;
@@ -375,7 +375,12 @@ button:hover {
 
 .spacer {
     height: 60px;
+    margin: 0;
+    padding: 0;
 }
+
 .smallspacer {
     height: 20px;
+    margin: 0;
+    padding: 0;
 }
