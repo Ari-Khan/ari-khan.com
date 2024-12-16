@@ -7,6 +7,11 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Redirect /index.html to /
+app.get("/index.html", (req, res) => {
+  res.redirect(301, "/");
+});
+
 // Dynamic routing for folders
 app.get("/:folder", (req, res, next) => {
   const folder = req.params.folder;
