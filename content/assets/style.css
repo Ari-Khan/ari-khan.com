@@ -2,7 +2,6 @@
 body, html {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
     box-sizing: border-box;
     height: 100%;
     width: 100%;
@@ -505,6 +504,7 @@ button:hover {
     text-align: center;
     width: 100%;
     position: relative;
+    overflow: hidden;
 }
 
 .projects-container-website {
@@ -514,6 +514,7 @@ button:hover {
     text-align: center;
     width: 100%;
     position: relative;
+    overflow: hidden;
 }
 
 .arikhan {
