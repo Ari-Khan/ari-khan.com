@@ -19,7 +19,7 @@ async function sendMessage(event) {
 
             // Send the message to the backend via a POST request
             try {
-                const response = await fetch('/chat', {
+                const response = await fetch('http://localhost:3000/content/ai', {  // Full address here
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ prompt: inputText })
