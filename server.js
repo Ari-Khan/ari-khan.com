@@ -4,12 +4,17 @@ import cors from 'cors';  // Import cors package
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
 import path from 'path';  // Needed for path resolution
+import { fileURLToPath } from "url";
 
 // Initialize environment variables
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Necessary for using __dirname with ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Enable CORS for all origins (you can restrict this to certain origins if needed)
 app.use(cors()); // This will allow requests from any origin
