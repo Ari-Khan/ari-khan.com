@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';  // Import cors package
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
+import path from 'path';  // Needed for path resolution
 
 // Initialize environment variables
 dotenv.config();
@@ -42,8 +43,44 @@ app.post('/content/ai', async (req, res) => {
     }
 });
 
-// Serve static files (optional, if you need to serve HTML and other assets)
-app.use(express.static('content'));
+// Redirect /index.html to /
+app.get("/index.html", (req, res) => {
+  res.redirect(301, "/");
+});
+
+// Dynamic routing for folders
+app.get("/:folder", (req, res, next) => {
+  const folder = req.params.folder;
+  const filePath = path.join(__dirname, "content", folder, "index.html");
+
+  res.sendFile(filePath, (err) => {
+    if (err) next();
+  });
+});
+
+// Handle deeper paths dynamically
+app.get("/:folder/*", (req, res, next) => {
+  const folder = req.params.folder;
+  const subPath = req.params[0];
+  const filePath = path.join(__dirname, "content", folder, subPath);
+
+  res.sendFile(filePath, (err) => {
+    if (err) next();
+  });
+});
+
+// Serve static files from the "content" directory
+app.use(express.static(path.join(__dirname, "content")));
+
+// Fallback route for index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "content/index.html"));
+});
+
+// 404 handler for unmatched routes
+app.use((req, res) => {
+  res.status(404).send("404 Not Found");
+});
 
 // Start the server
 app.listen(port, () => {
