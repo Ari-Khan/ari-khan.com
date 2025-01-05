@@ -30,7 +30,7 @@ async function sendMessage(event) {
                 if (data.response) {
                     // Display Gemini's response
                     const botResponse = document.createElement('p');
-                    botResponse.textContent = `Gemini: ${data.response}`;
+                    botResponse.textContent = `KingBot: ${data.response}`;
                     document.getElementById('scrollBox').appendChild(botResponse);
 
                     // Scroll to the bottom of the scroll box
@@ -39,7 +39,7 @@ async function sendMessage(event) {
             } catch (error) {
                 console.error("Error:", error);
                 const errorMessage = document.createElement('p');
-                errorMessage.textContent = "Error: Could not get a response from Gemini.";
+                errorMessage.textContent = "Error: Could not get a response from KingBot.";
                 document.getElementById('scrollBox').appendChild(errorMessage);
 
                 // Scroll to the bottom of the scroll box
