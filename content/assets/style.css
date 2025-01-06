@@ -12,6 +12,24 @@ a {
     color: inherit;
 }
 
+*::-webkit-scrollbar {
+    width: 10px;
+    height: auto;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #aaaaaa;
+}
+
+*::-webkit-scrollbar-track {
+    background: #eeeeee;
+}
+
 /* Navigation Bar */
 nav {
     position: fixed;
@@ -142,14 +160,25 @@ nav ul li a:hover {
 .scroll-box {
     font-family: "Poppins", sans-serif;
     flex-grow: 1;
+    width: 95%;
+    margin: auto;
     overflow-y: auto;
-    border-radius: 20px;
     padding: 10px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    max-width: 95%;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: #ffffff;
+}
+
+.scroll-box::-webkit-scrollbar {
+    width: 6px;
+    height: auto;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 6px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb:hover {
+    background: #aaaaaa;
 }
 
 .scroll-box p {
