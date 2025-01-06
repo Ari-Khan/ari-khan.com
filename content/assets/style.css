@@ -138,6 +138,16 @@ nav ul li a:hover {
     overflow-y: auto;
 }
 
+.scroll-box p {
+    max-width: 95%;
+    width: auto;
+    word-wrap: break-word;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    line-height: 1.75;
+}
 
 
 .kingbotheader {

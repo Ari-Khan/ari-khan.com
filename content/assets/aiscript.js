@@ -7,7 +7,7 @@ async function sendMessage(event) {
         if (inputText.trim() !== "") {
             // Display the user's message in the scroll box
             const userMessage = document.createElement('p');
-            userMessage.textContent = `You: ${inputText}`;
+            userMessage.innerHTML = `<strong>You:</strong> ${inputText}`;
             document.getElementById('scrollBox').appendChild(userMessage);
 
             // Clear the input box
@@ -30,7 +30,7 @@ async function sendMessage(event) {
                 if (data.response) {
                     // Display Gemini's response
                     const botResponse = document.createElement('p');
-                    botResponse.textContent = `KingBot: ${data.response}`;
+                    botResponse.innerHTML = `<strong>KingBot:</strong> ${data.response}`; // Make "KingBot" bold
                     document.getElementById('scrollBox').appendChild(botResponse);
 
                     // Scroll to the bottom of the scroll box
