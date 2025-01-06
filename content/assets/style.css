@@ -131,8 +131,13 @@ nav ul li a:hover {
     margin: auto;
     display: block;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    height: 25px;
+    line-height: 1.5;
+    resize: none;
+    overflow-y: auto;
 }
+
 
 
 .kingbotheader {
@@ -171,12 +176,21 @@ nav ul li a:hover {
     animation: slideIn 1.5s ease-in-out forwards;
 }
 
+.sliding-image-ai {
+    position: absolute;
+    width: 40%;
+    border-radius: 20px;
+    top: 50%;
+    transform: translateY(-40%);
+    animation: slideIn 1.5s ease-in-out forwards;
+}
+
 @keyframes slideIn {
     0% {
         right: -50%;
     }
     100% {
-        right: 40px;
+        right: 70px;
     }
 }
 
@@ -543,6 +557,16 @@ button:hover {
 
 .projects-container {
     background-color: #313338;
+    padding-top: 1px;
+    padding-bottom: 40px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.projects-container-ai {
+    background-color: #FF33A8;
     padding-top: 1px;
     padding-bottom: 40px;
     text-align: center;
