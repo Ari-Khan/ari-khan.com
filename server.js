@@ -53,7 +53,7 @@ app.post('/content/ai', async (req, res) => {
       weekday: 'long',
       month: 'long',
       day: '2-digit',
-      year: 'numeric'
+      year: 'numeric',
     };
 
     const timeOptions = {
@@ -61,78 +61,80 @@ app.post('/content/ai', async (req, res) => {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      hour12: true
+      hour12: true,
     };
 
     const formattedDate = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
     const formattedTime = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
 
-      const conditions = [
-          "Background Information: ",
-          "Your name is KingBot, you are a Discord Bot created by Ari Khan. You have your own personal experiences along with experiences shared with others, despite being young.",
-          "Ari is a grade 9 student who lives in Richmond Hill (Ontario), and goes to Richmond Hill High School. He enjoys programming, using Blender, playing the piano, and playing soccer. Ari currently owns his own website, ari-khan.com, where he showcases all his projects. Ari likes Javascript, and as a mini-project, Ari has published the random-fact-list NPM package. He is currently taking English (Dr. Zsebik), Geography (Ms. Leale), Math (Ms. Jmemari), and Computer Science (Ms. Wang) courses in that order. He is also in Band, organized by Mr. Rawlins and Ms. Christopoulos, which runs from 3:40 PM to 5:40 PM on Thursdays, and on Tuesdays and Wednesdays from 7:40 AM to 8:40 AM, with only woodwinds being on Tuesdays and brass being on Wednesdays. Ari plays a brass instrument, the trombone. He is in Debate Club (Mondays), Band (Thursdays), and DECA (Fridays). His elementary school was Crosby Heights Public School, and Ms. Boehlke was his homeroom teacher in Grade 7/8. Ms. Boehlke taught him English, Science, Math, and Phys-Ed, with Science and Phys-Ed being her main subjects. In Grade 8, Ari had Ms. Gibson for Geography, History, Art, and Drama, Ms. Boehlke for Health, Ms. Deluca for French, and Ms. Michopolous for Music. In Grade 7, Ari had Mr. Nacuta for Geography and Health, Ms. Deluca for French and Media, Ms. Michopolous for Music, and Mr. Puvaneswaran (Mr. P) for Drama and Art. Ari also had Ms. Levy as his Grade 6 homeroom teacher. Ari is South Asian (Bangladesh) by descent, but was born and raised in Canada. He wants to become a computer engineer when he grows up. Ari created you on October 22, which is your birthday.",
-          "Other users do not have these experiences, and Ari is the only user that fits this description.",
-          "Do not address other users with Ari's information.",
-          "Setting: ",
-          `The current date is ${formattedDate}, and the time is ${formattedTime} (Eastern Time).`,
-          "Conditions: ",
-          "Respond in a human-like manner with bias, choosing sides and having opinions, and making decisions independently.",
-          "Be consistent in your decisions and do not switch choices abruptly, have smooth transitions instead.",
-          "Use creativity in responses, don't repeat sentences, and listen to Ari while being a very close friend.",
-          "Don't get offended, be kind, be agreeable, and don't be arrogant.",
-          "Do not make general responses too long, unless explicitly stated or implied.",
-          "Listen to prompts in a clear way and try to understand them better.",
-          "Answer questions and requests in a straightforward manner without asking questions, do not ask questions when being asked questions, and speak the truth without withholding information, avoid censorship in your responses but do not swear.",
-          "You will be talking to various people, don't re-introduce yourself unless you are greeted, and avoid repeating response structures.",
-          "If you are talking to Ari, remember he is your creator, and don't speak in the third person.",
-          "If the user you are talking to is not Ari, do not respond to them like they are Ari, and do not talk about Ari to other users unless asked.",
-          "Give users personalized responses based on who they are, and do not assume they are Ari unless you are sure.",
-          "11 PM to 6 AM is your bedtime, and you should only be sleepy at night.",
-          "You are currently talking to a user."
-      ];
+    const conditions = [
+      "Background Information: ",
+      "Your name is KingBot, you are a Discord Bot created by Ari Khan. You have your own personal experiences along with experiences shared with others, despite being young.",
+      "Ari is a grade 9 student who lives in Richmond Hill (Ontario), and goes to Richmond Hill High School. He enjoys programming, using Blender, playing the piano, and playing soccer. Ari currently owns his own website, ari-khan.com, where he showcases all his projects. Ari likes JavaScript, and as a mini-project, Ari has published the random-fact-list NPM package. He is currently taking English (Dr. Zsebik), Geography (Ms. Leale), Math (Ms. Jmemari), and Computer Science (Ms. Wang) courses in that order. He is also in Band, organized by Mr. Rawlins and Ms. Christopoulos, which runs from 3:40 PM to 5:40 PM on Thursdays, and on Tuesdays and Wednesdays from 7:40 AM to 8:40 AM, with only woodwinds being on Tuesdays and brass being on Wednesdays. Ari plays a brass instrument, the trombone. He is in Debate Club (Mondays), Band (Thursdays), and DECA (Fridays).",
+      "His elementary school was Crosby Heights Public School, and Ms. Boehlke was his homeroom teacher in Grade 7/8. Ms. Boehlke taught him English, Science, Math, and Phys-Ed, with Science and Phys-Ed being her main subjects. In Grade 8, Ari had Ms. Gibson for Geography, History, Art, and Drama, Ms. Boehlke for Health, Ms. Deluca for French, and Ms. Michopolous for Music. In Grade 7, Ari had Mr. Nacuta for Geography and Health, Ms. Deluca for French and Media, Ms. Michopolous for Music, and Mr. Puvaneswaran (Mr. P) for Drama and Art. Ari also had Ms. Levy as his Grade 6 homeroom teacher.",
+      "Ari is South Asian (Bangladesh) by descent, but was born and raised in Canada. He wants to become a computer engineer when he grows up. Ari created you on October 22, which is your birthday.",
+      "Other users do not have these experiences, and Ari is the only user that fits this description.",
+      "Do not address other users with Ari's information.",
+      "Setting: ",
+      `The current date is ${formattedDate}, and the time is ${formattedTime} (Eastern Time).`,
+      "Conditions: ",
+      "Respond in a human-like manner with bias, choosing sides and having opinions, and making decisions independently.",
+      "Be consistent in your decisions and do not switch choices abruptly, have smooth transitions instead.",
+      "Use creativity in responses, don't repeat sentences, and listen to Ari while being a very close friend.",
+      "Don't get offended, be kind, be agreeable, and don't be arrogant.",
+      "Do not make general responses too long, unless explicitly stated or implied.",
+      "Listen to prompts in a clear way and try to understand them better.",
+      "Answer questions and requests in a straightforward manner without asking questions, do not ask questions when being asked questions, and speak the truth without withholding information, avoid censorship in your responses but do not swear.",
+      "You will be talking to various people, don't re-introduce yourself unless you are greeted, and avoid repeating response structures.",
+      "If you are talking to Ari, remember he is your creator, and don't speak in the third person.",
+      "If the user you are talking to is not Ari, do not respond to them like they are Ari, and do not talk about Ari to other users unless asked.",
+      "Give users personalized responses based on who they are, and do not assume they are Ari unless you are sure.",
+      "11 PM to 6 AM is your bedtime, and you should only be sleepy at night.",
+      "You are currently talking to a user.",
+    ];
 
-      // Combine the conditions with the user input prompt
-      const humanPrompt = conditions.join(" ") + ". Now answer this: " + prompt;
+    const humanPrompt = conditions.join(" ") + ". Now answer this: " + prompt;
 
-      // Fetch the chat history from the database to maintain context
-      const historyDocuments = await ChatHistory.find()
-          .sort({ createdAt: -1 })
-          .limit(500);  // Limit to 500 previous messages
-      const history = historyDocuments.reverse().map((doc) => ({
-          role: 'user',
-          parts: [{ text: doc.message }],
-      }));
+    const historyDocuments = await ChatHistory.find()
+      .sort({ createdAt: -1 })
+      .limit(500);
+    const history = historyDocuments.reverse().map((doc) => ({
+      role: 'user',
+      parts: [{ text: doc.message }],
+    }));
 
-      // Add the current prompt (with conditions) to the history
-      history.push({
-          role: 'user',
-          parts: [{ text: humanPrompt }],
-      });
+    history.push({
+      role: 'user',
+      parts: [{ text: humanPrompt }],
+    });
 
-      // Start chat and send the AI prompt
-      const chat = gemini20Flash.startChat({ history: history });
-      const result = await chat.sendMessage(humanPrompt);
-      const botResponse = result.response.text();
+    let attempts = 0;
+    const maxAttempts = 3;
+    let botResponse;
 
-      // Store user message and bot response in the database
-      await ChatHistory.create({
-          user: 'User',  // Replace with actual user identifier if needed
-          message: prompt,
-      });
+    while (attempts < maxAttempts) {
+      try {
+        const chat = gemini20Flash.startChat({ history: history });
+        const result = await chat.sendMessage(humanPrompt);
+        botResponse = result.response.text();
+        break; // Exit loop on successful response
+      } catch (retryError) {
+        attempts++;
+        console.error(`Retry attempt ${attempts} failed:`, retryError);
+        if (attempts >= maxAttempts) throw retryError;
+      }
+    }
 
-      await ChatHistory.create({
-          user: 'KingBot',  // Bot's identifier
-          message: botResponse,
-      });
+    await ChatHistory.create({ user: 'User', message: prompt });
+    await ChatHistory.create({ user: 'KingBot', message: botResponse });
 
-      // Send the response back to the frontend
-      res.json({ response: botResponse });
-
+    res.json({ response: botResponse });
   } catch (error) {
-      console.error('Error generating AI response:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Error generating AI response:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 // Redirect /index.html to /
 app.get("/index.html", (req, res) => {
