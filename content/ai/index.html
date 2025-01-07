@@ -49,8 +49,6 @@
 
         <input type="text" class="text-box" id="inputBox" placeholder="Type your message..." onkeydown="sendMessage(event)">
 
-        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
         <div class="projects-container-ai">
             <h1 class="kingbotheader">KingBot AI™</h1>
             <h1 class="kingbotitalicheader">A leader in artificial intelligence technologies.</h1>
@@ -62,7 +60,30 @@
             </div>
         </div>
 
+        <div>
+            <h1 class="aiheader">
+                AI Image Generator
+        </div>
+        <div>
+            <h1 class="middlesubheader">
+                Powered by KingBot AI™ Imagen
+        </div>
+
+        <div class="image-outer-box">
+            <div class="image-box" id="imageBox">
+            </div>
+        </div>     
+
+        <input 
+        type="text" 
+        class="input-box" 
+        id="imageTextBox" 
+        placeholder="Enter your prompt..." 
+        onkeydown="generateImage(event)">
+
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
         <script src="../assets/aiscript.js"></script>
+        <script src="../assets/aiimagescript.js"></script>
 
         <footer>
             <div class="footer-container">

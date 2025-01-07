@@ -167,6 +167,71 @@ nav ul li a:hover {
     background-color: #ffffff;
 }
 
+.input-box {
+    font-family: "Poppins", sans-serif;
+    width: 50%;
+    padding: 10px;
+    font-size: 16px;
+    border: 3px solid #000;
+    border-radius: 10px;
+    margin: auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    height: 25px;
+    line-height: 1.5;
+    resize: none;
+    overflow-y: auto;
+}
+
+.image-outer-box {
+    font-family: "Poppins", sans-serif;
+    width: 50%;
+    height: 75%;
+    margin: auto;
+    text-align: center;
+    border: 3px solid #000;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.image-box {
+    font-family: "Poppins", sans-serif;
+    flex-grow: 1;
+    width: 95%;
+    margin: auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: 100%; /* Ensures the container takes up full height */
+    width: 100%; /* Ensures the container takes up full width */
+}
+
+.spinner {
+    border: 16px solid #efefef; /* Light gray background */
+    border-top: 16px solid #1964FA; /* Blue color for the spinner */
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite; /* Animation for spinning effect */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
 .scroll-box::-webkit-scrollbar {
     width: 6px;
     height: auto;
