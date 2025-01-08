@@ -700,6 +700,36 @@ button:hover {
     overflow: hidden;
 }
 
+.disclaimer-container {
+    background-color: #33FF57;
+    padding-top: 1px;
+    padding-bottom: 40px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.disclaimer {
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+    padding-left: 210px;
+    max-width: 1250px;
+}
+
+.disclaimer-header {
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    padding-top: 20px;
+    font-size: 24px;
+    font-weight: 500;
+    text-align: left;
+    padding-left: 210px;
+}
+
 .arikhan {
     font-family: "Poppins", sans-serif;
     color: #fff;
