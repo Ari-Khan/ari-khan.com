@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';  // Import CORS
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import dotenv from "dotenv";
 import path from 'path';  // For path resolution
 import { fileURLToPath } from "url";
