@@ -42,7 +42,8 @@ nav {
     text-align: center;
     z-index: 3;
     overflow-x: auto; 
-    padding-left: 10.4%;
+    padding-left: 10.3vw;
+    box-sizing: border-box;
 }
 
 nav ul {
