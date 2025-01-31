@@ -438,14 +438,13 @@ nav ul li a:hover {
 /* Image and Video Containers */
 .image-container {
     max-width: 100%;
-    max-height: 75%;
+    max-height: 72%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
 }
-
 
 .image-container img {
     width: 100%;
@@ -464,7 +463,6 @@ nav ul li a:hover {
     pointer-events: none;
 }
 
-/* Text Overlays */
 .text-overlay {
     position: absolute;
     top: 50%;
@@ -483,13 +481,13 @@ nav ul li a:hover {
 }
 
 .slide-in-text {
-    font-size: 80px;
+    font-size: clamp(40px, 8vw, 80px);
     animation: slide-in 2s forwards;
     margin-top: 4px;
 }
 
 .slide-in-text-small {
-    font-size: 56px;
+    font-size: clamp(28px, 6vw, 56px);
     animation: slide-in 1.75s forwards;
 }
 
@@ -499,11 +497,10 @@ nav ul li a:hover {
         opacity: 0;
     }
     to {
-        transform: translateX(10%);
+        transform: translateX(calc(max(30%, 50px)));
         opacity: 1;
     }
 }
-
 
 /* Scrolling Gallery */
 .scrolling-gallery {
@@ -705,6 +702,12 @@ button:hover {
     flex: 1;
     max-width: 52vw;
     word-wrap: break-word;
+}
+
+.topspacer {
+    height: 80px;
+    margin: 0;
+    padding: 0;
 }
 
 .spacer {
