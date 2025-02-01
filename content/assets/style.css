@@ -341,7 +341,7 @@ nav ul li a:hover {
     font-size: 32px;
     font-weight: 500;
     text-align: left;
-    padding-left: 150px;
+    padding-left: 10vw;
 }
 
 .subsubheader {
@@ -349,7 +349,7 @@ nav ul li a:hover {
     font-size: 24px;
     font-weight: 500;
     text-align: left;
-    padding-left: 150px;
+    padding-left: 11vw;
 }
 
 .legal {
@@ -357,17 +357,8 @@ nav ul li a:hover {
     font-size: 18px;
     font-weight: 500;
     text-align: left;
-    padding-left: 150px;
-    max-width: 1300px;
-}
-
-.legal {
-    font-family: "Poppins", sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    text-align: left;
-    padding-left: 150px;
-    max-width: 1300px;
+    max-width: 80vw;
+    padding-left: 12vw;
     opacity: 0;
     animation: slide-in-legal 1.5s forwards;
 }
@@ -377,8 +368,8 @@ nav ul li a:hover {
     font-size: 18px;
     font-weight: 500;
     text-align: left;
-    padding-left: 200px;
-    max-width: 1200px;
+    padding-left: 15vw;
+    max-width: 75vw;
     opacity: 0;
     animation: slide-in-legallist 1.75s forwards;
 }
@@ -549,9 +540,16 @@ footer {
     padding: 5px 0;
 }
 
+footer p {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .footer-container {
     display: flex;
-    padding: 10px;
+    justify-content: center;
+    width: 100%;
 }
 
 .links-grid {
@@ -572,9 +570,6 @@ footer {
 .links-grid li a {
     font-size: 18px;
     color: #fff;
-}
-
-.links-grid li a {
     text-decoration: none;
     color: inherit;
     position: relative;
@@ -595,6 +590,50 @@ footer {
     width: 100%;
 }
 
+@media (max-width: 1100px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .links-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px 15vw;
+        justify-items: center;
+        margin: auto;
+    }
+
+    .logo-container {
+        width: 40%;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .links-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px 10vw;
+        justify-items: center;
+        margin: auto;
+    }
+
+    .links-grid li a {
+        font-size: 12px;
+        color: #fff;
+        text-decoration: none;
+        color: inherit;
+        position: relative;
+    }
+
+    .logo-container {
+        width: 60%;
+    }
+
+}
 
 .mailcontainer {
     background: #fff;
@@ -692,7 +731,7 @@ button:hover {
     margin: auto;
     font-family: "Poppins", sans-serif;
     font-weight: bold;
-    font-size: 48px;
+    font-size: clamp(28px, 8vw, 42px);
     opacity: 0;
     transition: opacity 1s ease;
     display: inline-block;
