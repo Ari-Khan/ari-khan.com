@@ -596,16 +596,17 @@ footer {
 }
 
 
-.container {
+.mailcontainer {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     max-width: 400px;
-    margin-left: 100px;
     width: 100%;
     box-sizing: border-box;
+    margin-left: 100px;
+    padding-bottom: 35px;
 }
 
 h2 {
@@ -655,6 +656,26 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+    }
+
+    .mailcontainer {
+        margin-left: 0;
+        max-width: 100%;
+    }
+
+    #fade-text {
+        margin-top: 20px;
+        padding-bottom: 20px;
+    }
 }
   
 .container {
@@ -671,7 +692,7 @@ button:hover {
     margin: auto;
     font-family: "Poppins", sans-serif;
     font-weight: bold;
-    font-size: 48px;
+    font-size: clamp(28px, 8vw, 48px);
     opacity: 0;
     transition: opacity 1s ease;
     display: inline-block;
