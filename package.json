@@ -19,16 +19,16 @@
   "license": "CC-BY-NC-4.0",
   "description": "ari-khan.com website program.",
   "dependencies": {
-    "@google/generative-ai": "^0.23.0",
+    "@google/generative-ai": "^0.24.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
     "mongoose": "^8.12.1",
-    "next": "^15.2.1",
+    "next": "^15.2.2",
     "node-fetch": "^3.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "vercel": "^41.3.2"
+    "vercel": "^41.4.1"
   }
 }
