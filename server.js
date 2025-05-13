@@ -8,8 +8,6 @@ import path from 'path';  // For path resolution
 import { fileURLToPath } from "url";
 import mongoose from 'mongoose';  // Import Mongoose for MongoDB
 import ChatHistory from './models/ChatHistory.js';  // Import the ChatHistory schema
-import fs from 'fs';
-import fetch from 'node-fetch';
 
 // Initialize environment variables
 dotenv.config();
