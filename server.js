@@ -1,15 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import cors from 'cors';  // Import CORS
+import cors from 'cors'; 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import dotenv from "dotenv";
-import path from 'path';  // For path resolution
+import path from 'path';
 import { fileURLToPath } from "url";
 import mongoose from 'mongoose';  // Import Mongoose for MongoDB
 import ChatHistory from './models/ChatHistory.js';  // Import the ChatHistory schema
-import fs from 'fs';
-import fetch from 'node-fetch';
 
 // Initialize environment variables
 dotenv.config();
@@ -37,7 +35,7 @@ app.use(bodyParser.json());
 // Set up the Google Gemini model
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 const gemini20Flash = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash-exp",
+  model: "gemini-2.5-flash-exp",
   safetySettings: safetySettings,
   generationConfig: {
     maxOutputTokens: 8192,

@@ -26,15 +26,12 @@ async function sendMessage(event) {
 
                 const data = await response.json();
                 if (data.response) {
-                    // Convert Markdown response to HTML using marked
                     const htmlResponse = marked.parse(data.response);
 
-                    // Display the converted response
                     const botResponse = document.createElement('div'); // Use <div> for richer content
                     botResponse.innerHTML = `<strong>KingBot:</strong> ${htmlResponse.trim()} <br><br>`;
                     document.getElementById('scrollBox').appendChild(botResponse);
 
-                    // Scroll to the bottom of the scroll box
                     scrollBox.scrollTop = scrollBox.scrollHeight;
                 }
             } catch (error) {
