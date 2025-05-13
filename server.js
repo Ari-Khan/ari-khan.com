@@ -1,13 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import cors from 'cors'; 
+import cors from 'cors';  // Import CORS
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import dotenv from "dotenv";
-import path from 'path';
+import path from 'path';  // For path resolution
 import { fileURLToPath } from "url";
 import mongoose from 'mongoose';  // Import Mongoose for MongoDB
 import ChatHistory from './models/ChatHistory.js';  // Import the ChatHistory schema
+import fs from 'fs';
+import fetch from 'node-fetch';
 
 // Initialize environment variables
 dotenv.config();
