@@ -30,8 +30,5 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "vercel": "^41.7.6"
-  },
-  "overrides": {
-    "math-intrinsics": "1.0.0"
   }
 }
