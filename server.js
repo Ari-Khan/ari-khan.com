@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 import mongoose from 'mongoose';  // Import Mongoose for MongoDB
 import ChatHistory from './models/ChatHistory.js';  // Import the ChatHistory schema
 
-// Initialize environment variables
+// Initialize ENV variables
 dotenv.config();
 
 const app = express();
