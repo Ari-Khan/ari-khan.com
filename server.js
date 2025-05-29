@@ -148,6 +148,17 @@ app.get("/index.html", (req, res) => {
   res.redirect(301, "/");
 });
 
+// Handle deep routes under /blog (e.g., /blog/2025/xarticle)
+app.get("/blog/*", (req, res, next) => {
+  const subPath = req.params[0];
+  const filePath = path.join(__dirname, "content", "blog", subPath);
+
+  res.sendFile(filePath, (err) => {
+    if (err) next();
+  });
+});
+
+
 // Dynamic routing for folders
 app.get("/:folder", (req, res, next) => {
   const folder = req.params.folder;
