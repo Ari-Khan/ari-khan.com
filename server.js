@@ -150,11 +150,19 @@ app.get("/index.html", (req, res) => {
 
 // Handle deep routes under /blog (e.g., /blog/2025/xarticle)
 app.get("/blog/*", (req, res, next) => {
-  const subPath = req.params[0];
-  const filePath = path.join(__dirname, "content", "blog", subPath);
+  const subPath = req.params[0]; 
+  let filePath = path.join(__dirname, "content", "blog", subPath);
+  
+  console.log("Trying:", filePath);
+  console.log("Also trying:", filePath + ".html");
 
   res.sendFile(filePath, (err) => {
-    if (err) next();
+    if (!err) return;
+
+    const htmlPath = filePath + ".html";
+    res.sendFile(htmlPath, (err2) => {
+      if (err2) next();
+    });
   });
 });
 
