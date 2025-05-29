@@ -158,7 +158,6 @@ app.get("/blog/*", (req, res, next) => {
   });
 });
 
-
 // Dynamic routing for folders
 app.get("/:folder", (req, res, next) => {
   const folder = req.params.folder;
