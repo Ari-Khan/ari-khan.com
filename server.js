@@ -148,24 +148,6 @@ app.get("/index.html", (req, res) => {
   res.redirect(301, "/");
 });
 
-// Handle deep routes under /blog (e.g., /blog/2025/xarticle)
-app.get("/blog/*", (req, res, next) => {
-  const subPath = req.params[0]; 
-  let filePath = path.join(__dirname, "content", "blog", subPath);
-  
-  console.log("Trying:", filePath);
-  console.log("Also trying:", filePath + ".html");
-
-  res.sendFile(filePath, (err) => {
-    if (!err) return;
-
-    const htmlPath = filePath + ".html";
-    res.sendFile(htmlPath, (err2) => {
-      if (err2) next();
-    });
-  });
-});
-
 // Dynamic routing for folders
 app.get("/:folder", (req, res, next) => {
   const folder = req.params.folder;
@@ -189,11 +171,6 @@ app.get("/:folder/*", (req, res, next) => {
 
 // Serve static files from the "content" directory
 app.use(express.static(path.join(__dirname, "content")));
-
-// Fallback route for index.html
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "content/index.html"));
-});
 
 // 404 handler for unmatched routes
 app.use((req, res) => {
