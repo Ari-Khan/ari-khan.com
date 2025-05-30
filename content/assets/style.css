@@ -1,23 +1,26 @@
 /* General Reset */
 @font-face {
-  font-family: 'Poppins';
-  src: url('poppins/Poppins-Medium.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
+    font-family: 'Poppins';
+    font-display: swap;
+    src: url('poppins/Poppins-Medium.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('poppins/Poppins-Bold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
+    font-family: 'Poppins';
+    font-display: swap;
+    src: url('poppins/Poppins-Bold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Foldit';
-  src: url('../assets/foldit/Foldit-VariableFont_wght.ttf') format('truetype');
-  font-weight: 650;
-  font-style: normal;
+    font-family: 'Foldit';
+    font-display: swap;
+    src: url('../assets/foldit/Foldit-VariableFont_wght.ttf') format('truetype');
+    font-weight: 650;
+    font-style: normal;
 }
 
 body, html {
