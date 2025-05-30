@@ -148,16 +148,6 @@ app.get("/index.html", (req, res) => {
   res.redirect(301, "/");
 });
 
-// Dynamic routing for folders
-app.get("/:folder", (req, res, next) => {
-  const folder = req.params.folder;
-  const filePath = path.join(__dirname, "content", folder, "index.html");
-
-  res.sendFile(filePath, (err) => {
-    if (err) next();
-  });
-});
-
 // Serve static files from the "content" directory
 app.use(express.static(path.join(__dirname, "content")));
 
