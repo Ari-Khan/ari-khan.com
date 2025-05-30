@@ -158,6 +158,9 @@ app.get("/*", (req, res, next) => {
   });
 });
 
+// Serve static files from the "content" directory
+app.use(express.static(path.join(__dirname, "content")));
+
 // 404 handler for unmatched routes
 app.use((req, res) => {
   res.status(404).send("404 Not Found");
