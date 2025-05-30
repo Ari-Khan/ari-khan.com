@@ -27,18 +27,16 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Function to handle the Enter key press and send the message
-async function sendMessage(event) {
+window.sendMessage = async function(event) {
     if (event.key === 'Enter') {
         const inputBox = document.getElementById('inputBox');
         const inputText = inputBox.value.trim();
         if (inputText === '') return;
 
-        // Display user's message
         displayMessage('You', inputText);
         addToChatHistory('user', inputText);
         inputBox.value = '';
 
-        // Get full history to send to backend
         const history = getChatHistory();
 
         try {
@@ -65,7 +63,8 @@ async function sendMessage(event) {
             displayMessage('KingBot', "Error: Could not get a response from KingBot.");
         }
     }
-}
+};
+
 
 // Attach the sendMessage function to the input box
 document.getElementById('inputBox').addEventListener('keydown', sendMessage);
