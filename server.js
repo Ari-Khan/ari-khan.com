@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 
 // Set up the Google Gemini model
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-const gemini20Flash = genAI.getGenerativeModel({
+const gemini25Flash = genAI.getGenerativeModel({
   model: "gemini-2.5-flash-preview-04-17",
   safetySettings: safetySettings,
   generationConfig: {
@@ -43,14 +43,9 @@ const gemini20Flash = genAI.getGenerativeModel({
   },
 });
 
-// MongoDB connection using Mongoose
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected successfully'))
-  .catch(err => console.error('MongoDB connection error:', err));
-
 // Route to handle content/ai
 app.post('/content/ai', async (req, res) => {
-  const { prompt } = req.body;
+  const { prompt, history = [] } = req.body;
 
   try {
     const now = new Date();
@@ -101,40 +96,36 @@ app.post('/content/ai', async (req, res) => {
       "You are currently talking to a user.",
     ];
 
-    const humanPrompt = conditions.join(" ") + ". Now answer this: " + prompt;
+    const systemPrompt = conditions.join(" ") + ". Now answer this: " + prompt;
 
-    const historyDocuments = await ChatHistory.find()
-      .sort({ createdAt: -1 })
-      .limit(500);
-    const history = historyDocuments.reverse().map((doc) => ({
-      role: 'user',
-      parts: [{ text: doc.message }],
+    // Convert browser-side history to Gemini-compatible format
+    const chatHistory = history.map(h => ({
+      role: h.role === 'user' ? 'user' : 'model',
+      parts: [{ text: h.message }],
     }));
 
-    history.push({
+    chatHistory.push({
       role: 'user',
-      parts: [{ text: humanPrompt }],
+      parts: [{ text: systemPrompt }],
     });
 
+    // Try sending to Gemini
     let attempts = 0;
     const maxAttempts = 3;
     let botResponse;
 
     while (attempts < maxAttempts) {
       try {
-        const chat = gemini20Flash.startChat({ history: history });
-        const result = await chat.sendMessage(humanPrompt);
+        const chat = gemini25Flash.startChat({ history: chatHistory });
+        const result = await chat.sendMessage(systemPrompt);
         botResponse = result.response.text();
-        break; // Exit loop on successful response
+        break;
       } catch (retryError) {
         attempts++;
         console.error(`Retry attempt ${attempts} failed:`, retryError);
         if (attempts >= maxAttempts) throw retryError;
       }
     }
-
-    await ChatHistory.create({ user: 'User', message: prompt });
-    await ChatHistory.create({ user: 'KingBot', message: botResponse });
 
     res.json({ response: botResponse });
   } catch (error) {

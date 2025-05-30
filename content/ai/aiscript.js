@@ -1,48 +1,78 @@
+// Helper functions to manage chat history in localStorage
+function getChatHistory() {
+    const history = localStorage.getItem('kingbot-history');
+    return history ? JSON.parse(history) : [];
+}
+
+function addToChatHistory(role, message) {
+    const history = getChatHistory();
+    history.push({ role, message });
+    localStorage.setItem('kingbot-history', JSON.stringify(history));
+}
+
+function displayMessage(role, message) {
+    const container = document.getElementById('scrollBox');
+    const msgElem = document.createElement('div');
+    msgElem.innerHTML = `<strong>${role}:</strong> ${marked.parse(message.trim())}<br><br>`;
+    container.appendChild(msgElem);
+    container.scrollTop = container.scrollHeight;
+}
+
+// Load history when the page loads
+window.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('scrollBox');
+    container.innerHTML = ''; // Clear any existing content
+    const history = getChatHistory();
+    history.forEach(msg => {
+        displayMessage(msg.role === 'user' ? 'You' : 'KingBot', msg.message);
+    });
+});
+
 // Function to handle the Enter key press and send the message
 async function sendMessage(event) {
-    if (event.key === 'Enter') {
-        const inputText = document.getElementById('inputBox').value;
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
 
-        if (inputText.trim() !== "") {
-            // Display the user's message in the scroll box
-            const userMessage = document.createElement('p');
-            userMessage.innerHTML = `<strong>You: </strong> ${inputText} <br><br>`;
-            document.getElementById('scrollBox').appendChild(userMessage);
+        const inputBox = document.getElementById('inputBox');
+        const inputText = inputBox.value.trim();
+        if (inputText === '') return;
 
-            // Clear the input box
-            document.getElementById('inputBox').value = "";
+        // Display user's message
+        displayMessage('You', inputText);
+        addToChatHistory('user', inputText);
+        inputBox.value = '';
 
-            // Scroll to the bottom of the scroll box
-            const scrollBox = document.getElementById('scrollBox');
-            scrollBox.scrollTop = scrollBox.scrollHeight;
+        // Optional: display loading message
+        // displayMessage('KingBot', "_Thinking..._");
 
-            // Send the message to the serverless backend
-            try {
-                const response = await fetch('https://ari-khan.vercel.app/content/ai', { // Replace with your deployed backend URL
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: inputText })
-                });
+        // Prepare history for backend (convert roles)
+        const history = getChatHistory().map(h => ({
+            role: h.role === 'user' ? 'user' : 'bot',
+            message: h.message
+        }));
 
-                const data = await response.json();
-                if (data.response) {
-                    const htmlResponse = marked.parse(data.response);
+        try {
+            const response = await fetch('https://ari-khan.vercel.app/content/ai', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    prompt: inputText,
+                    history: history
+                })
+            });
 
-                    const botResponse = document.createElement('div'); // Use <div> for richer content
-                    botResponse.innerHTML = `<strong>KingBot:</strong> ${htmlResponse.trim()} <br><br>`;
-                    document.getElementById('scrollBox').appendChild(botResponse);
+            const data = await response.json();
 
-                    scrollBox.scrollTop = scrollBox.scrollHeight;
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                const errorMessage = document.createElement('p');
-                errorMessage.textContent = "Error: Could not get a response from KingBot.";
-                document.getElementById('scrollBox').appendChild(errorMessage);
-
-                // Scroll to the bottom of the scroll box
-                scrollBox.scrollTop = scrollBox.scrollHeight;
+            if (data.response) {
+                const botReply = data.response;
+                displayMessage('KingBot', botReply);
+                addToChatHistory('bot', botReply);
+            } else {
+                throw new Error("No response field in result");
             }
+        } catch (error) {
+            console.error("Error:", error);
+            displayMessage('KingBot', "Error: Could not get a response from KingBot.");
         }
     }
 }
