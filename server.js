@@ -158,17 +158,6 @@ app.get("/:folder", (req, res, next) => {
   });
 });
 
-// Handle deeper paths dynamically
-app.get("/:folder/*", (req, res, next) => {
-  const folder = req.params.folder;
-  const subPath = req.params[0];
-  const filePath = path.join(__dirname, "content", folder, subPath);
-
-  res.sendFile(filePath, (err) => {
-    if (err) next();
-  });
-});
-
 // Serve static files from the "content" directory
 app.use(express.static(path.join(__dirname, "content")));
 
