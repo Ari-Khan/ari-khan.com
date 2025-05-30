@@ -2,7 +2,7 @@
 
 This is the source code for **ari-khan.com**, the personal website of Ari Khan. The site showcases Ari’s projects, blog articles, and personal initiatives in software development, AI, design, and more.
 
-Built with:
+### Built with:
 - **Next.js** for frontend routing and rendering
 - **Express.js** for custom backend APIs
 - **Google Generative AI** for KingBot responses
