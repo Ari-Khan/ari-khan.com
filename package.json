@@ -24,7 +24,6 @@
     "dotenv": "^16.5.0",
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
-    "mongoose": "^8.15.1",
     "next": "^15.3.3",
     "node-fetch": "^3.3.2",
     "react": "^19.1.0",
