@@ -939,7 +939,7 @@ button:hover {
     height: 3px;
     background-color: #000000;
     transform: scaleX(0);
-    transform-origin: bottom right;
+    transform-origin: bottom left;
     transition: transform 0.3s ease-in-out;
 }
 
