@@ -27,6 +27,7 @@ body, html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    padding-top: 42px;
     height: 100%;
     width: 100%;
     overflow-x: hidden;
@@ -177,7 +178,7 @@ nav ul li a:hover {
 .outer-box {
     font-family: "Poppins", sans-serif;
     width: 50%;
-    height: 50%;
+    height: 56%;
     margin: auto;
     text-align: center;
     border: 3px solid #000;
@@ -460,7 +461,7 @@ nav ul li a:hover {
 /* Image and Video Containers */
 .image-container {
     max-width: 100%;
-    max-height: 72%;
+    max-height: 81%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -794,24 +795,6 @@ button:hover {
     word-wrap: break-word;
 }
 
-.topspacer {
-    height: 80px;
-    margin: 0;
-    padding: 0;
-}
-
-.spacer {
-    height: 60px;
-    margin: 0;
-    padding: 0;
-}
-
-.smallspacer {
-    height: 20px;
-    margin: 0;
-    padding: 0;
-}
-
 .projects-container {
     background-color: #313338;
     padding-top: 1px;
@@ -1029,5 +1012,9 @@ button:hover {
     max-width: 60%;
     display: block;
     margin: auto;
+}
+
+.legalbody {
+    padding-bottom: 65px;
 }
 
