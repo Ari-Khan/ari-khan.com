@@ -20,8 +20,6 @@ function displayMessage(role, message) {
 
 // Load history when the page loads
 window.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('scrollBox');
-    container.innerHTML = ''; // Clear any existing content
     const history = getChatHistory();
     history.forEach(msg => {
         displayMessage(msg.role === 'user' ? 'You' : 'KingBot', msg.message);
@@ -30,9 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Function to handle the Enter key press and send the message
 async function sendMessage(event) {
-    if (event.key === 'Enter' && !event.shiftKey) {
-        event.preventDefault();
-
+    if (event.key === 'Enter') {
         const inputBox = document.getElementById('inputBox');
         const inputText = inputBox.value.trim();
         if (inputText === '') return;
@@ -42,14 +38,8 @@ async function sendMessage(event) {
         addToChatHistory('user', inputText);
         inputBox.value = '';
 
-        // Optional: display loading message
-        // displayMessage('KingBot', "_Thinking..._");
-
-        // Prepare history for backend (convert roles)
-        const history = getChatHistory().map(h => ({
-            role: h.role === 'user' ? 'user' : 'bot',
-            message: h.message
-        }));
+        // Get full history to send to backend
+        const history = getChatHistory();
 
         try {
             const response = await fetch('https://ari-khan.vercel.app/content/ai', {
@@ -57,7 +47,7 @@ async function sendMessage(event) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     prompt: inputText,
-                    history: history
+                    history: history.map(h => ({ role: h.role === 'user' ? 'user' : 'bot', message: h.message }))
                 })
             });
 
