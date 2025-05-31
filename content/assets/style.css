@@ -1131,3 +1131,19 @@ button:hover {
     margin-left: -10%;
     border-radius: 20px;
 }
+
+.articlemailcontainer {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 50%;
+    box-sizing: border-box;
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.article-container {
+    padding-bottom: 40px;
+}

@@ -95,26 +95,19 @@
 
         <div class="main-content">
             <div class="mailcontainer">
-                <h2>Join Our Mailing List!</h2>
-                <form id="emailForm">
-                <input type="email" id="emailInput" placeholder="Enter your email..." required>
-                <button type="submit">Join Mailing List</button>
+                <form class="gform" id="emailForm" method="POST" action="https://script.google.com/macros/s/AKfycbybV5nlcFPSUm93amcTlRYaQkgg3gGjxLXjFZZs5DrN91o2wy-urFQjkonQBGlio2Ab/exec">
+                    <h2 class="mailinglistheader">Join Our Mailing List!</h2>
+                    <div style="display:none" class="thankyou_message">
+                        <h2>Thanks for joining!</h2>
+                    </div>
+                    <input type="email" id="emailInput" name="email" placeholder="Enter your email..." required>
+                    <button type="submit">Join Mailing List</button>
                 </form>
                 <p id="status"></p>
             </div>              
         
             <div id="fade-text" class="fade-text">Find Innovation</div>
         </div>
-
-        <script>
-            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-        </script>
-
-        <script>
-            window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-        </script>
-
-        <script src="./assets/script.js" async defer></script>
 
         <footer>
             <div class="footer-container">
@@ -140,28 +133,14 @@
         </footer>
         
         <script>
-            document.getElementById("emailForm").addEventListener("submit", async function (e) {
-            e.preventDefault();
-
-            const email = document.getElementById("emailInput").value;
-
-            try {
-                const response = await fetch("https://script.google.com/macros/s/AKfycbws3CD1UjhD4Tpk6AWh1tPGS1hZgBnzK9CdehW-Spc_TqCsblrMkJZcLRC_tjXe7UUOrA/exec", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email })
-                });
-
-                const result = await response.json();
-                document.getElementById("status").textContent = result.message || "Submitted!";
-            } catch (err) {
-                document.getElementById("status").textContent = "Error submitting form.";
-                console.error(err);
-            }
-            });
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
         </script>
 
+        <script>
+            window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+        </script>
+
+        <script src="./assets/script.js" async defer></script>
+        <script data-cfasync="false" type="text/javascript" src="./assets/form-submission-handler.js"></script>
     </body>
 </html>

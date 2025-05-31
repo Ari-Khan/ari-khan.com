@@ -25,7 +25,7 @@
             </ul>
         </nav>
 
-        <div>
+        <div class="article-container">
             <h1 class="article-header">
                 The Best Free Tools For Student Developers In 2025
             </h1>
@@ -70,6 +70,17 @@
                 <br><br> Bear in mind that there is a <b>moderate learning curve</b> associated with Vercel, and it may be easier for new developers to host their websites on static hosts such as GitHub Pages.
                 <br><br>
             </div>
+            <div class="articlemailcontainer">
+                <form class="gform" id="emailForm" method="POST" action="https://script.google.com/macros/s/AKfycbybV5nlcFPSUm93amcTlRYaQkgg3gGjxLXjFZZs5DrN91o2wy-urFQjkonQBGlio2Ab/exec">
+                    <h2 class="mailinglistheader">Join Our Mailing List!</h2>
+                    <div style="display:none" class="thankyou_message">
+                        <h2>Thanks for joining!</h2>
+                    </div>
+                    <input type="email" id="emailInput" name="email" placeholder="Enter your email..." required>
+                    <button type="submit">Join Mailing List</button>
+                </form>
+                <p id="status"></p>
+            </div>    
         </div>
 
         <footer>
@@ -90,11 +101,11 @@
                         <li><a href="../../../terms">Terms of Use</a></li>
                 </ul>
             </div>
-        
+
             <div class="thin-line"></div>
             <p>&copy; 2024 Ari Khan. All rights reserved. | <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="hover-underline">CC BY-NC 4.0</a></p>
         </footer>
-        
 
+        <script data-cfasync="false" type="text/javascript" src="../../../assets/form-submission-handler.js"></script>
     </body>
 </html>

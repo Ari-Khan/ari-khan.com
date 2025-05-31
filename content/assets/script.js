@@ -18,35 +18,6 @@ const fadeTextEl = document.getElementById('fade-text');
 
 let index = 0;
 
-function subscribe() {
-    const emailInput = document.getElementById('email');
-    const email = emailInput.value;
-  
-    const data = {
-      email: email,
-    };
-  
-    const url = 'https://script.google.com/macros/s/AKfycby-r3GNsIx91GrniN-lrNzcGZWEI9lF1Q-i-8YRGxc-5Pi4b0DUqHopK9FXpbYSqZpvAA/exec';
-  
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log('Server Response:', res);
-        document.getElementById('message').innerText = res.message || 'Subscription Successful!';
-      })
-      .catch((error) => {
-        console.error('Subscription Error:', error);
-        document.getElementById('message').innerText = 'An error occurred while subscribing!';
-      });
-  }
-  
-
 function fadeEffect() {
   fadeTextEl.style.opacity = 0;
 
