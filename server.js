@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 // Set up the Google Gemini model
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 const gemini25Flash = genAI.getGenerativeModel({
-  model: "gemini-2.5-flash-preview-04-17",
+  model: "gemini-2.5-flash-preview-05-20",
   safetySettings: safetySettings,
   generationConfig: {
     maxOutputTokens: 8192,
