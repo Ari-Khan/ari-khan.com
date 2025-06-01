@@ -195,7 +195,27 @@ nav ul li a:hover {
     padding: 10px;
     margin-bottom: 20px;
     display: flex;
+    position: relative;
     flex-direction: column;
+}
+
+.clear-button {
+  width: 5%;
+  min-width: 75px;
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  border: 3px solid #000;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.clear-button:hover {
+  background-color: #ddd;
 }
 
 .scroll-box {

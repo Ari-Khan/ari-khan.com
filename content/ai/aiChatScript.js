@@ -18,6 +18,14 @@ function displayMessage(role, message) {
     container.scrollTop = container.scrollHeight;
 }
 
+function clearMessages() {
+    localStorage.removeItem('kingbot-history');
+
+    const container = document.getElementById('scrollBox');
+    container.innerHTML = '';
+}
+
+
 // Load history when the page loads
 window.addEventListener('DOMContentLoaded', () => {
     const history = getChatHistory();
