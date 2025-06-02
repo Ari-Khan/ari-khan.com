@@ -267,6 +267,21 @@ nav ul li a:hover{
 	padding-top:10px;
 	background-color:#fff
 }
+.spinner-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+.spinner {
+	border: 16px solid #efefef;
+	border-top: 16px solid rgb(25, 115, 250);
+	border-radius: 100%;
+	width: 100px;
+	height: 100px;
+	animation: spin 1s linear infinite;
+}
 @keyframes spin{
 	0%{
 		transform:rotate(0)

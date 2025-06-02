@@ -11,7 +11,7 @@ function generateImage(event) {
         } else {
             // Landscape
             width = window.innerWidth * 0.5;
-            height = window.innerHeight * 0.66;
+            height = window.innerHeight * 0.67;
         }
         const seed = Math.floor(Math.random() * 100000); // Generate a random seed
         const model = "flux-pro"; // Model name
