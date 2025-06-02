@@ -4,8 +4,15 @@ function generateImage(event) {
       const prompt = document.getElementById("imageTextBox").value.trim(); // Get the input text
   
       if (prompt) {
-        const width = 1024;
-        const height = 700;
+        if (window.innerHeight > window.innerWidth) {
+            // Portrait
+            width = window.innerWidth * 0.65;
+            height = window.innerHeight * 0.65;
+        } else {
+            // Landscape
+            width = window.innerWidth * 0.5;
+            height = window.innerHeight * 0.66;
+        }
         const seed = Math.floor(Math.random() * 100000); // Generate a random seed
         const model = "flux-pro"; // Model name
   
@@ -36,7 +43,7 @@ function generateImage(event) {
         const img = document.createElement("img");
         img.src = imageUrl;
         img.alt = `Generated image for: ${prompt}`;
-        img.style.maxWidth = "100%"; // Ensure it fits the container
+        img.style.maxWidth = "100%";
         img.style.border = "1px solid #ccc";
         img.style.borderRadius = "20px";
 
