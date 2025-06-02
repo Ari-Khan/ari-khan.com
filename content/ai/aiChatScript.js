@@ -45,7 +45,6 @@ function deleteLastMessage() {
     }
 
     if (last.role === 'bot') {
-        // Prepare to re-ask after 1s unless user deletes another
         pendingBotUndo = true;
 
         if (repromptTimeout) clearTimeout(repromptTimeout);
@@ -56,14 +55,32 @@ function deleteLastMessage() {
             }
         }, 2000);
     } else if (last.role === 'user') {
-        // If user deletes a user message, cancel any pending bot re-ask
-        if (repromptTimeout) {
-            clearTimeout(repromptTimeout);
-            repromptTimeout = null;
+        // If user deletes their message AND the ellipsis is gone, cancel everything
+        if (!thinkingElem || !container.contains(thinkingElem)) {
+            if (repromptTimeout) {
+                clearTimeout(repromptTimeout);
+                repromptTimeout = null;
+            }
             pendingBotUndo = false;
         }
     }
+
+    // Start watching for thinkingElem deletion here too
+    if (thinkingElem) {
+        const observer = new MutationObserver(() => {
+            if (!container.contains(thinkingElem)) {
+                if (repromptTimeout) {
+                    clearTimeout(repromptTimeout);
+                    repromptTimeout = null;
+                }
+                pendingBotUndo = false;
+                observer.disconnect();
+            }
+        });
+        observer.observe(container, { childList: true });
+    }
 }
+
 
 async function repromptLastPrompt() {
     const history = getChatHistory();
@@ -132,7 +149,6 @@ window.sendMessage = async function(event) {
         addToChatHistory('user', inputText);
         inputBox.value = '';
 
-        // Add placeholder response
         const container = document.getElementById('scrollBox');
         thinkingElem = document.createElement('div');
         thinkingElem.innerHTML = `<strong>KingBot:</strong> <em>...</em><br><br>`;
@@ -140,6 +156,23 @@ window.sendMessage = async function(event) {
         container.scrollTop = container.scrollHeight;
 
         const history = getChatHistory();
+        let cancelled = false;
+
+        // Intercept deletion of the thinkingElem
+        const observer = new MutationObserver(() => {
+            if (!container.contains(thinkingElem)) {
+                cancelled = true;
+                observer.disconnect();
+
+                // Cancel any pending reprompt if ellipsis was deleted
+                if (repromptTimeout) {
+                    clearTimeout(repromptTimeout);
+                    repromptTimeout = null;
+                }
+                pendingBotUndo = false;
+            }
+        });
+        observer.observe(container, { childList: true });
 
         try {
             const response = await fetch('https://ari-khan.vercel.app/content/ai', {
@@ -153,28 +186,24 @@ window.sendMessage = async function(event) {
 
             const data = await response.json();
 
-            if (data.response) {
-                // Replace placeholder with real response
-                thinkingElem.remove();
-                thinkingElem = null;
+            if (!cancelled && data.response) {
+                if (thinkingElem) {
+                    thinkingElem.remove();
+                    thinkingElem = null;
+                }
 
                 const botReply = data.response;
                 displayMessage('KingBot', botReply);
                 addToChatHistory('bot', botReply);
-            } else {
-                throw new Error("No response field in result");
             }
         } catch (error) {
             console.error("Error:", error);
 
-            if (thinkingElem) {
+            if (!cancelled && thinkingElem) {
                 thinkingElem.remove();
                 thinkingElem = null;
+                displayMessage('KingBot', "Error: Could not get a response from KingBot.");
             }
-
-            displayMessage('KingBot', "Error: Could not get a response from KingBot.");
         }
     }
 };
-
-
