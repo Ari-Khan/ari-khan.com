@@ -1,21 +1,21 @@
 @font-face{
 	font-family:Poppins;
 	font-display:swap;
-	src:url(https://www.ari-khan.com/assets/poppins/Poppins-Medium-Subset.woff2) format('woff2');
+	src:url(./poppins/Poppins-Medium-Subset.woff2) format('woff2');
 	font-weight:400;
 	font-style:normal
 }
 @font-face{
 	font-family:Poppins;
 	font-display:swap;
-	src:url(https://www.ari-khan.com/assets/poppins/Poppins-Bold-Subset.woff2) format('woff2');
+	src:url(./poppins/Poppins-Bold-Subset.woff2) format('woff2');
 	font-weight:600;
 	font-style:normal
 }
 @font-face{
 	font-family:Foldit;
 	font-display:swap;
-	src:url(https://www.ari-khan.com/assets/foldit/Foldit-VariableFont_wght.woff2) format('woff2');
+	src:url(./foldit/Foldit-VariableFont_wght.woff2) format('woff2');
 	font-weight:650;
 	font-style:normal
 }
