@@ -22,9 +22,7 @@
     var formData = {};
     fields.forEach(function(name){
       var element = elements[name];
-      
       formData[name] = element.value;
-
       if (element.length) {
         var data = [];
         for (var i = 0; i < element.length; i++) {
@@ -39,8 +37,7 @@
 
     formData.formDataNameOrder = JSON.stringify(fields);
     formData.formGoogleSheetName = form.dataset.sheet || "responses";
-    formData.formGoogleSendEmail
-      = form.dataset.email || "";
+    formData.formGoogleSendEmail = form.dataset.email || "";
 
     return {data: formData, honeypot: honeypot};
   }
@@ -55,28 +52,29 @@
       return false;
     }
 
+    var mailingListHeader = form.querySelector(".mailinglistheader");
+    var thankYouMessage = form.querySelector(".thankyou_message");
+    if (thankYouMessage) {
+      thankYouMessage.style.display = "block";
+      mailingListHeader.style.display = "none";
+    }
+
     disableAllButtons(form);
     var url = form.action;
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          form.reset();
-          var formElements = form.querySelector(".form-elements")
-          if (formElements) {
-            formElements.style.display = "none"; // hide form
-          }
-          var mailingListHeader = form.querySelector(".mailinglistheader");
-          var thankYouMessage = form.querySelector(".thankyou_message");
-          if (thankYouMessage) {
-            thankYouMessage.style.display = "block";
-            mailingListHeader.style.display = "none"
-          }
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        form.reset();
+        var formElements = form.querySelector(".form-elements");
+        if (formElements) {
+          formElements.style.display = "none";
         }
+      }
     };
     var encoded = Object.keys(data).map(function(k) {
-        return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+      return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
     }).join('&');
     xhr.send(encoded);
   }
@@ -86,7 +84,7 @@
     for (var i = 0; i < forms.length; i++) {
       forms[i].addEventListener("submit", handleFormSubmit, false);
     }
-  };
+  }
   document.addEventListener("DOMContentLoaded", loaded, false);
 
   function disableAllButtons(form) {
