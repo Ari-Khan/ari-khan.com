@@ -1,69 +1,51 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import cors from 'cors';  // Import CORS
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
+import cors from 'cors';
+import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
-import path from 'path';  // For path resolution
+import path from 'path'; 
 import { fileURLToPath } from "url";
 
-// Initialize ENV variables
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Necessary for using __dirname with ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const safetySettings = [
-  { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-  { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE },
-  { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE },
-  { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH },
+  { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+  { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_ONLY_HIGH" },
+  { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" },
+  { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
 ];
 
-// Enable CORS for all origins
 app.use(cors()); 
 
-// Use body-parser middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-// Set up the Google Gemini model
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-const gemini25Flash = genAI.getGenerativeModel({
-  model: "gemini-2.5-flash-preview-05-20",
-  safetySettings: safetySettings,
-  generationConfig: {
-    maxOutputTokens: 8192,
-    temperature: 1.25,
-  },
-});
+const googleGenAIClient = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
-// Route to handle content/ai
+async function chatWithGemini25Flash(prompt, history = []) {
+  const chat = googleGenAIClient.chats.create({
+    model: "gemini-2.5-flash-preview-05-20",
+    temperature: 1.25,
+    safetySettings: safetySettings,
+    history
+  });
+
+  const response = await chat.sendMessage({ message: prompt });
+  return response.text || "";
+}
+
 app.post('/content/ai', async (req, res) => {
   const { prompt, history = [] } = req.body;
 
   try {
     const now = new Date();
-
-    const dateOptions = {
-      timeZone: 'America/New_York',
-      weekday: 'long',
-      month: 'long',
-      day: '2-digit',
-      year: 'numeric',
-    };
-
-    const timeOptions = {
-      timeZone: 'America/New_York',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true,
-    };
-
+    const dateOptions = { timeZone: 'America/New_York', weekday: 'long', month: 'long', day: '2-digit', year: 'numeric' };
+    const timeOptions = { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
     const formattedDate = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
     const formattedTime = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
 
@@ -95,36 +77,10 @@ app.post('/content/ai', async (req, res) => {
     ];
 
     const systemPrompt = conditions.join(" ") + ". Now answer this: " + prompt;
+    const chatHistory = history.map(h => ({ role: h.role === 'user' ? 'user' : 'model', parts: [{ text: h.message }] }));
+    chatHistory.push({ role: 'system', parts: [{ text: systemPrompt }] });
 
-    // Convert browser-side history to Gemini-compatible format
-    const chatHistory = history.map(h => ({
-      role: h.role === 'user' ? 'user' : 'model',
-      parts: [{ text: h.message }],
-    }));
-
-    chatHistory.push({
-      role: 'user',
-      parts: [{ text: systemPrompt }],
-    });
-
-    // Try sending to Gemini
-    let attempts = 0;
-    const maxAttempts = 3;
-    let botResponse;
-
-    while (attempts < maxAttempts) {
-      try {
-        const chat = gemini25Flash.startChat({ history: chatHistory });
-        const result = await chat.sendMessage(systemPrompt);
-        botResponse = result.response.text();
-        break;
-      } catch (retryError) {
-        attempts++;
-        console.error(`Retry attempt ${attempts} failed:`, retryError);
-        if (attempts >= maxAttempts) throw retryError;
-      }
-    }
-
+    const botResponse = await chatWithGemini25Flash(prompt, chatHistory);
     res.json({ response: botResponse });
   } catch (error) {
     console.error('Error generating AI response:', error);
@@ -132,12 +88,10 @@ app.post('/content/ai', async (req, res) => {
   }
 });
 
-// Redirect /index.html to /
 app.get("/index.html", (req, res) => {
   res.redirect(301, "/");
 });
 
-// Dynamic routing for folders
 app.get("/*", (req, res, next) => {
   const requestPath = req.params[0];
   const filePath = path.join(__dirname, "content", requestPath, "index.html");
@@ -147,15 +101,12 @@ app.get("/*", (req, res, next) => {
   });
 });
 
-// Serve static files from the "content" directory
 app.use(express.static(path.join(__dirname, "content")));
 
-// 404 handler for unmatched routes
 app.use((req, res) => {
   res.status(404).send("404 Not Found");
 });
 
-// Start the server
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
