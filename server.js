@@ -78,7 +78,7 @@ app.post('/content/ai', async (req, res) => {
 
     const systemPrompt = conditions.join(" ") + ". Now answer this: " + prompt;
     const chatHistory = history.map(h => ({ role: h.role === 'user' ? 'user' : 'model', parts: [{ text: h.message }] }));
-    chatHistory.push({ role: 'system', parts: [{ text: systemPrompt }] });
+    chatHistory.push({ role: 'user', parts: [{ text: systemPrompt }] });
 
     const botResponse = await chatWithGemini25Flash(prompt, chatHistory);
     res.json({ response: botResponse });
