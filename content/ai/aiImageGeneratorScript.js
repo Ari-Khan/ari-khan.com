@@ -1,25 +1,20 @@
-// aiscript.js
 function generateImage(event) {
-    if (event.key === "Enter") { // Check if Enter key is pressed
-      const prompt = document.getElementById("imageTextBox").value.trim(); // Get the input text
+    if (event.key === "Enter") {
+      const prompt = document.getElementById("imageTextBox").value.trim();
   
       if (prompt) {
         if (window.innerHeight > window.innerWidth) {
-            // Portrait
             width = window.innerWidth * 0.65;
             height = window.innerHeight * 0.65;
         } else {
-            // Landscape
             width = window.innerWidth * 0.5;
-            height = window.innerHeight * 0.67;
+            height = window.innerHeight * 0.68;
         }
-        const seed = Math.floor(Math.random() * 100000); // Generate a random seed
-        const model = "flux-pro"; // Model name
+        const seed = Math.floor(Math.random() * 100000);
+        const model = "flux-pro";
   
-        // Construct the image URL
         const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?model=${model}&width=${width}&height=${height}&nologo=true&private=true&enhance=true&seed=${seed}&safe=true`;
         
-        // Get the image container
         const imageBox = document.getElementById("imageBox");
         if (!imageBox) {
           console.error("Error: imageBox element not found in the DOM.");
@@ -28,7 +23,6 @@ function generateImage(event) {
 
         document.getElementById('imageTextBox').value = "";
 
-        // Remove existing image if any
         imageBox.innerHTML = "";
 
         const spinnerContainer = document.createElement("div");
@@ -39,7 +33,6 @@ function generateImage(event) {
             spinnerContainer.appendChild(spinner);
             imageBox.appendChild(spinnerContainer);
   
-        // Create a new image element
         const img = document.createElement("img");
         img.src = imageUrl;
         img.alt = `Generated image for: ${prompt}`;
@@ -48,9 +41,7 @@ function generateImage(event) {
         img.style.borderRadius = "20px";
 
         img.onload = function() {
-            // Remove the spinner
             imageBox.removeChild(spinnerContainer);
-            // Append the image to the container
             imageBox.appendChild(img);
         };
 

@@ -29,7 +29,7 @@ const googleGenAIClient = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY }
 
 async function chatWithGemini25Flash(prompt, history = []) {
   const chat = googleGenAIClient.chats.create({
-    model: "gemini-2.5-flash-preview-05-20",
+    model: "gemini-2.5-flash-latest",
     temperature: 1.25,
     safetySettings: safetySettings,
     history
@@ -77,10 +77,16 @@ app.post('/content/ai', async (req, res) => {
     ];
 
     const systemPrompt = conditions.join(" ") + ". Now answer this: " + prompt;
-    const chatHistory = history.map(h => ({ role: h.role === 'user' ? 'user' : 'model', parts: [{ text: h.message }] }));
-    chatHistory.push({ role: 'user', parts: [{ text: systemPrompt }] });
+    const chatHistory = history.map(h => ({
+      role: h.role === 'user' ? 'user' : 'model',
+      parts: [{ text: h.message }]
+    }));
 
-    const botResponse = await chatWithGemini25Flash(prompt, chatHistory);
+    const botResponse = await chatWithGemini25Flash(systemPrompt, chatHistory);
+
+    chatHistory.push({ role: 'user', parts: [{ text: prompt }] });
+    chatHistory.push({ role: 'model', parts: [{ text: botResponse }] });
+
     res.json({ response: botResponse });
   } catch (error) {
     console.error('Error generating AI response:', error);
