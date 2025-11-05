@@ -2,7 +2,6 @@ let pendingBotUndo = false;
 let repromptTimeout = null;
 let thinkingElem = null;
 
-// Helper functions to manage chat history in localStorage
 function getChatHistory() {
     const history = localStorage.getItem('kingbot-history');
     return history ? JSON.parse(history) : [];
@@ -38,7 +37,6 @@ function deleteLastMessage() {
     const last = history.pop();
     localStorage.setItem('kingbot-history', JSON.stringify(history));
 
-    // Remove the last message div from DOM
     const children = Array.from(container.children);
     if (children.length > 0) {
         container.removeChild(children[children.length - 1]);
@@ -55,7 +53,6 @@ function deleteLastMessage() {
             }
         }, 2000);
     } else if (last.role === 'user') {
-        // If user deletes their message AND the ellipsis is gone, cancel everything
         if (!thinkingElem || !container.contains(thinkingElem)) {
             if (repromptTimeout) {
                 clearTimeout(repromptTimeout);
@@ -65,7 +62,6 @@ function deleteLastMessage() {
         }
     }
 
-    // Start watching for thinkingElem deletion here too
     if (thinkingElem) {
         const observer = new MutationObserver(() => {
             if (!container.contains(thinkingElem)) {
@@ -88,7 +84,6 @@ async function repromptLastPrompt() {
 
     if (!lastUserMsg) return;
 
-    // Show "KingBot is typing..."
     const container = document.getElementById('scrollBox');
     thinkingElem = document.createElement('div');
     thinkingElem.innerHTML = `<strong>KingBot:</strong> <em>...</em><br><br>`;
@@ -130,7 +125,6 @@ async function repromptLastPrompt() {
     }
 }
 
-// Load history when the page loads
 window.addEventListener('DOMContentLoaded', () => {
     const history = getChatHistory();
     history.forEach(msg => {
@@ -138,7 +132,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Function to handle the Enter key press and send the message
 window.sendMessage = async function(event) {
     if (event.key === 'Enter') {
         const inputBox = document.getElementById('inputBox');
@@ -158,13 +151,11 @@ window.sendMessage = async function(event) {
         const history = getChatHistory();
         let cancelled = false;
 
-        // Intercept deletion of the thinkingElem
         const observer = new MutationObserver(() => {
             if (!container.contains(thinkingElem)) {
                 cancelled = true;
                 observer.disconnect();
 
-                // Cancel any pending reprompt if ellipsis was deleted
                 if (repromptTimeout) {
                     clearTimeout(repromptTimeout);
                     repromptTimeout = null;
