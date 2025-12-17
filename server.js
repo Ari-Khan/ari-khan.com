@@ -29,7 +29,7 @@ const googleGenAIClient = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY }
 
 async function chatWithGeminiFlash(prompt, history = []) {
   const chat = googleGenAIClient.chats.create({
-    model: "gemini-2.0-flash",
+    model: "gemini-flash-latest",
     temperature: 1.25,
     safetySettings: safetySettings,
     history
