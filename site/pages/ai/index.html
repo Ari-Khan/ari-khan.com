@@ -31,91 +31,93 @@
         <script src="/components/footer.js" defer></script>
 
         <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
-        <script src="/assets/js/aiChatScript.js" defer></script>
-        <script src="/assets/js/aiImageGeneratorScript.js" defer></script>
+        <script src="/assets/js/ai-chat.js" defer></script>
+        <script src="/assets/js/ai-image-generator.js" defer></script>
     </head>
 
     <body>
         <site-header></site-header>
 
-        <div>
-            <h1 class="aiheader">AI Chat</h1>
-        </div>
-
-        <div>
-            <h1 class="middlesubheader">Powered by KingBot AI™ Chat</h1>
-        </div>
-
-        <div class="outer-box">
-            <div class="button-group">
-                <button class="clear-button" onclick="clearMessages()">Clear</button>
-                <button class="delete-button" onclick="deleteLastMessage()">Undo</button>
+        <main>
+            <div>
+                <h1 class="aiheader">AI Chat</h1>
             </div>
 
-            <div class="scroll-box" id="scrollBox"></div>
-        </div>
-
-        <input
-            type="text"
-            class="text-box"
-            id="inputBox"
-            placeholder="Type your message..."
-            onkeydown="sendMessage(event)"
-        >
-
-        <div class="projects-container-ai">
-            <h1 class="kingbot">KingBot AI™</h1>
-            <h1 class="kingbotheader">A leader in indie artificial intelligence.</h1>
-
-            <h1 class="kingbottext">
-                KingBot AI™ is a developer of multipurpose artificial intelligence technologies, developing the
-                KingBot AI™ Chat, KingBot AI™ Vision, and KingBot AI™ Imagen models.
-                <br><br>
-                KingBot AI™ continues to develop new products, embracing the pursuit of AI realism through text,
-                vision, and art as the emergence of AGI nears.
-            </h1>
-
-            <img src="/assets/images/projects/ai.webp" alt="KingBot" class="sliding-image-ai">
-
-            <div class="links-container">
-                <a href="/ai" class="hover-underline-link">Access</a>
-                <a href="https://www.linkedin.com/company/kingbot-ai" class="hover-underline-link">LinkedIn</a>
+            <div>
+                <h1 class="middlesubheader">Powered by KingBot AI™ Chat</h1>
             </div>
-        </div>
 
-        <div>
-            <h1 class="aiheader">AI Image Generator</h1>
-        </div>
+            <div class="outer-box">
+                <div class="button-group">
+                    <button class="clear-button" onclick="clearMessages()">Clear</button>
+                    <button class="delete-button" onclick="deleteLastMessage()">Undo</button>
+                </div>
 
-        <div>
-            <h1 class="middlesubheader">Powered by KingBot AI™ Imagen</h1>
-        </div>
-
-        <div class="image-outer-box">
-            <div class="image-box" id="imageBox"></div>
-        </div>
-
-        <input
-            type="text"
-            class="input-box"
-            id="imageTextBox"
-            placeholder="Enter your prompt..."
-            onkeydown="generateImage(event)"
-        >
-
-        <div class="disclaimer-container">
-            <h1 class="disclaimer-header"><strong>Disclaimer:</strong></h1>
-            <h1 class="disclaimer">
-                KingBot AI™ provides information and assistance but is not responsible for any outcomes,
-                decisions, or consequences resulting from the use of its responses or generated content.
-                Please review, use discretion, and consult professionals when needed.
-            </h1>
-
-            <div class="links-container">
-                <a href="/terms" class="hover-underline-link">Terms and Conditions</a>
-                <a href="/privacy" class="hover-underline-link">Privacy</a>
+                <div class="scroll-box" id="scrollBox"></div>
             </div>
-        </div>
+
+            <input
+                type="text"
+                class="text-box"
+                id="inputBox"
+                placeholder="Type your message..."
+                onkeydown="sendMessage(event)"
+            >
+
+            <div class="projects-container-ai">
+                <h1 class="kingbot">KingBot AI™</h1>
+                <h1 class="kingbotheader">A leader in indie artificial intelligence.</h1>
+
+                <h1 class="kingbottext">
+                    KingBot AI™ is a developer of multipurpose artificial intelligence technologies, developing the
+                    KingBot AI™ Chat, KingBot AI™ Vision, and KingBot AI™ Imagen models.
+                    <br><br>
+                    KingBot AI™ continues to develop new products, embracing the pursuit of AI realism through text,
+                    vision, and art as the emergence of AGI nears.
+                </h1>
+
+                <img src="/assets/images/projects/ai.webp" alt="KingBot" class="sliding-image-ai">
+
+                <div class="links-container">
+                    <a href="/ai" class="hover-underline-link">Access</a>
+                    <a href="https://www.linkedin.com/company/kingbot-ai" class="hover-underline-link">LinkedIn</a>
+                </div>
+            </div>
+
+            <div>
+                <h1 class="aiheader">AI Image Generator</h1>
+            </div>
+
+            <div>
+                <h1 class="middlesubheader">Powered by KingBot AI™ Imagen</h1>
+            </div>
+
+            <div class="image-outer-box">
+                <div class="image-box" id="imageBox"></div>
+            </div>
+
+            <input
+                type="text"
+                class="input-box"
+                id="imageTextBox"
+                placeholder="Enter your prompt..."
+                onkeydown="generateImage(event)"
+            >
+
+            <div class="disclaimer-container">
+                <h1 class="disclaimer-header"><strong>Disclaimer:</strong></h1>
+                <h1 class="disclaimer">
+                    KingBot AI™ provides information and assistance but is not responsible for any outcomes,
+                    decisions, or consequences resulting from the use of its responses or generated content.
+                    Please review, use discretion, and consult professionals when needed.
+                </h1>
+
+                <div class="links-container">
+                    <a href="/terms" class="hover-underline-link">Terms and Conditions</a>
+                    <a href="/privacy" class="hover-underline-link">Privacy</a>
+                </div>
+            </div>
+        </main>
 
         <site-footer></site-footer>
     </body>

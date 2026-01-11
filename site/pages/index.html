@@ -35,6 +35,8 @@
 
         <script src="/components/header.js" defer></script>
         <script src="/components/footer.js" defer></script>
+        <script src="/components/scrolling-gallery.js" defer></script>
+        <script src="/components/mailing-list.js" defer></script>
 
         <script src="/assets/js/script.js" defer></script>
         <script src="/assets/js/form-submission-handler.js" defer></script>
@@ -43,90 +45,36 @@
     <body>
         <site-header></site-header>
 
-        <div class="image-container">
-            <img src="/assets/images/profile/gumballs.webp" alt="Backdrop Image" width="629" height="1350" fetchpriority="high">
-            <div class="text-overlay">
-                <div class="slide-in-text-small">A place for</div>
-                <div class="slide-in-text">Innovation.</div>
-            </div>
-        </div>
-
-        <section>
-            <h1 class="header">Foreword</h1>
-            <p class="foreword">
-                Hey there! I'm <strong>Ari Khan</strong>, and I'm thrilled you're here.<br><br>
-                This site is a space where I share my journey, projects, interests, and everything that fuels my curiosity.
-                Whether it's about technology, engineering, school projects, or personal growth, you'll find bits and pieces
-                of what I love and care about. I believe in stepping out of comfort zones, learning from every experience,
-                and constantly growing and starting new projects.<br><br>
-                Feel free to explore, drop a message, or just say hi.<br><br>
-                — Ari Khan
-            </p>
-        </section>
-
-        <section>
-            <h1 class="header">Projects Gallery</h1>
-        </section>
-
-        <div class="scrolling-gallery">
-            <div class="gallery-content">
-                <img src="/assets/images/gallery/gallery-1.webp" alt="">
-                <img src="/assets/images/gallery/gallery-2.webp" alt="">
-                <img src="/assets/images/gallery/gallery-3.webp" alt="">
-                <img src="/assets/images/gallery/gallery-4.webp" alt="">
-                <video autoplay loop muted controls>
-                    <source src="/assets/images/gallery/video1.mp4" type="video/mp4">
-                </video>
-                <img src="/assets/images/gallery/gallery-5.webp" alt="">
-                <img src="/assets/images/gallery/gallery-6.webp" alt="">
-                <img src="/assets/images/gallery/gallery-7.webp" alt="">
-                <img src="/assets/images/gallery/gallery-8.webp" alt="">
-                <img src="/assets/images/gallery/gallery-9.webp" alt="">
-                <video autoplay loop muted controls>
-                    <source src="/assets/images/gallery/video2.mp4" type="video/mp4">
-                </video>
-                <img src="/assets/images/gallery/gallery-10.webp" alt="">
-                <img src="/assets/images/gallery/gallery-11.webp" alt="">
-                <img src="/assets/images/gallery/gallery-12.webp" alt="">
-            </div>
-
-            <div class="gallery-content gallery-duplicate">
-                <img src="/assets/images/gallery/gallery-1.webp" alt="">
-                <img src="/assets/images/gallery/gallery-2.webp" alt="">
-                <img src="/assets/images/gallery/gallery-3.webp" alt="">
-                <img src="/assets/images/gallery/gallery-4.webp" alt="">
-                <img src="/assets/images/gallery/gallery-4.webp" alt="">
-                <video autoplay loop muted controls>
-                    <source src="/assets/images/gallery/video1.mp4" type="video/mp4">
-                </video>
-                <img src="/assets/images/gallery/gallery-5.webp" alt="">
-                <img src="/assets/images/gallery/gallery-6.webp" alt="">
-                <img src="/assets/images/gallery/gallery-7.webp" alt="">
-                <img src="/assets/images/gallery/gallery-8.webp" alt="">
-                <img src="/assets/images/gallery/gallery-9.webp" alt="">
-                <video autoplay loop muted controls>
-                    <source src="/assets/images/gallery/video2.mp4" type="video/mp4">
-                </video>
-                <img src="/assets/images/gallery/gallery-10.webp" alt="">
-                <img src="/assets/images/gallery/gallery-11.webp" alt="">
-                <img src="/assets/images/gallery/gallery-12.webp" alt="">
-            </div>
-        </div>
-
-        <div class="mailcontainer">
-            <form class="gform" method="POST" action="https://script.google.com/macros/s/AKfycbw1l0BfyMcO0Hojk2X6SzXeQ9dIz9uZlnvVPpNhZi3TWb4fjpbglKpGDEbligQE-wvE/exec">
-                <h2 class="mailinglistheader">Join My Newsletter!</h2>
-
-                <div class="thankyou_message" hidden>
-                    <h2>Thanks for joining!</h2>
+        <main>
+            <div class="image-container">
+                <img src="/assets/images/profile/gumballs.webp" alt="Backdrop Image" width="629" height="1350" fetchpriority="high">
+                <div class="text-overlay">
+                    <div class="slide-in-text-small">A place for</div>
+                    <div class="slide-in-text">Innovation.</div>
                 </div>
+            </div>
 
-                <input type="email" name="email" placeholder="Enter your email..." required>
-                <input type="text" name="website" tabindex="-1" autocomplete="off" hidden>
+            <section>
+                <h1 class="header">Foreword</h1>
+                <p class="foreword">
+                    Hey there! I'm <strong>Ari Khan</strong>, and I'm thrilled you're here.<br><br>
+                    This site is a space where I share my journey, projects, interests, and everything that fuels my curiosity.
+                    Whether it's about technology, engineering, school projects, or personal growth, you'll find bits and pieces
+                    of what I love and care about. I believe in stepping out of comfort zones, learning from every experience,
+                    and constantly growing and starting new projects.<br><br>
+                    Feel free to explore, drop a message, or just say hi.<br><br>
+                    — Ari Khan
+                </p>
+            </section>
 
-                <button type="submit">Join Mailing List</button>
-            </form>
-        </div>
+            <section>
+                <h1 class="header">Projects Gallery</h1>
+            </section>
+
+            <scrolling-gallery></scrolling-gallery>
+
+            <mailing-list></mailing-list>
+        </main>
 
         <site-footer></site-footer>
     </body>
