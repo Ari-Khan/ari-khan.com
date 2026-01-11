@@ -1,9 +1,10 @@
 nav{
 	position:fixed;
-	top:12px;
+	top:10px;
 	left:50%;
 	transform:translateX(-50%);
 	width:90vw;
+	height: 60px;
 	background:#fff;
 	border:3px solid #ccc;
 	border-radius:9999px;
@@ -20,7 +21,7 @@ nav ul{
 nav ul li a{
 	display:block;
 	color:#000;
-	padding:17px 50px 14px;
+	padding:13px 50px 14px;
 	font-size:20px;
 	opacity:.8;
 	font-family:Poppins,sans-serif

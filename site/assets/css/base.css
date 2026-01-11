@@ -28,6 +28,13 @@ body,html {
 	overflow-x:hidden;
 	font-family:Poppins,sans-serif
 }
+main {
+	margin-top: 90px;
+}
+main.home-page,
+main.projects-page {
+	margin-top:0;
+}
 a { 
 	text-decoration:none;
 	color:inherit

@@ -148,3 +148,8 @@
 .scroll-box::-webkit-scrollbar-thumb:hover {
 	background:#aaa
 }
+.grey-spacer{
+	height:60px;
+	background:#313338;
+}
+
