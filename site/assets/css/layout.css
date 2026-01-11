@@ -174,7 +174,7 @@ footer p{
 .outer-box{
 	font-family:Poppins,sans-serif;
 	width:50%;
-	height:57%;
+	height:52vh;
 	margin:auto;
 	text-align:center;
 	border:3px solid #000;
@@ -188,7 +188,7 @@ footer p{
 .image-outer-box{
 	font-family:Poppins,sans-serif;
 	width:50%;
-	height:75%;
+	height:75vh;
 	margin:auto;
 	text-align:center;
 	border:3px solid #000;
