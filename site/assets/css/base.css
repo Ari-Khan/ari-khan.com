@@ -1,0 +1,153 @@
+@font-face { 
+	font-family:Poppins;
+	font-display:block;
+	src:url(/assets/fonts/poppins/Poppins-Medium-Subset.woff2) format('woff2');
+	font-weight:400;
+	font-style:normal
+}
+@font-face { 
+	font-family:Poppins;
+	font-display:block;
+	src:url(/assets/fonts/poppins/Poppins-Bold-Subset.woff2) format('woff2');
+	font-weight:600;
+	font-style:normal
+}
+@font-face { 
+	font-family:Foldit;
+	font-display:block;
+	src:url(/assets/fonts/foldit/Foldit-VariableFont_wght.woff2) format('woff2');
+	font-weight:650;
+	font-style:normal
+}
+body,html { 
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	padding-top:32px;
+	height:100%;
+	width:100%;
+	overflow-x:hidden;
+	font-family:Poppins,sans-serif
+}
+a { 
+	text-decoration:none;
+	color:inherit
+}
+::-webkit-scrollbar { 
+	width:.75vw;
+	height:.75vh
+}
+::-webkit-scrollbar-thumb { 
+	background:#ccc;
+	border-radius:6px
+}
+::-webkit-scrollbar-thumb:hover { 
+	background:#aaa
+}
+::-webkit-scrollbar-track { 
+	background:#eee
+}
+h2 { 
+	font-family:Poppins,sans-serif;
+	font-weight:600;
+	font-size:24px;
+	color:#000
+}
+input[type=email] { 
+	width:100%;
+	padding:15px;
+	font-family:Poppins,sans-serif;
+	margin:10px 0;
+	border:1px solid #ccc;
+	border-radius:5px;
+	box-sizing:border-box;
+	font-size:16px
+}
+button { 
+	background-color:#fad700;
+	color:#fff;
+	padding:15px;
+	width:100%;
+	font-size:18px;
+	font-family:Poppins,sans-serif;
+	border:none;
+	border-radius:5px;
+	cursor:pointer;
+	font-weight:700;
+	transition:background-color .3s
+}
+button:hover { 
+	background-color:#d2aa00
+}
+#message { 
+	color:#33ff57;
+	font-weight:700;
+	font-family:Poppins,sans-serif;
+	margin-top:15px
+}
+@keyframes spin { 
+	0%{transform:rotate(0)}
+	100%{transform:rotate(360deg)}
+}
+@keyframes slideIn { 
+	0%{right:-50%}
+	100%{right:70px}
+}
+@keyframes slideIn2 { 
+	0%{left:-50%}
+	100%{left:40px}
+}
+@keyframes slide-in { 
+	from{
+		transform:translateX(-140%);
+		opacity:0
+	}
+	to{
+		transform:translateX(calc(max(30%,50px)));
+		opacity:1
+	}
+}
+@keyframes slide-in-legal { 
+	from{
+		transform:translateX(-100px);
+		opacity:0
+	}
+	to{
+		transform:translateX(0);
+		opacity:1
+	}
+}
+@keyframes slide-in-legallist { 
+	from{
+		transform:translateX(-100px);
+		opacity:0
+	}
+	to{
+		transform:translateX(0);
+		opacity:1
+	}
+}
+@keyframes scroll-gallery { 
+	from{transform:translateX(0)}
+	to{transform:translateX(-100%)}
+}
+@media (orientation:portrait) { 
+	.text-box{
+		width:75%
+	}
+}
+@media (orientation:portrait) { 
+	.outer-box{
+		width:75%
+	}
+}
+@media (orientation:portrait) { 
+	.input-box{
+		width:75%
+	}
+}
+@media (orientation:portrait) { 
+	.image-outer-box{
+		width:75%
+	}
+}
