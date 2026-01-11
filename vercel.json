@@ -2,8 +2,5 @@
   "version": 2,
   "builds": [
     { "src": "app/server.js", "use": "@vercel/node" }
-  ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/app/server.js" }
   ]
 }
