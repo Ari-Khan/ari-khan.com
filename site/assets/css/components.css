@@ -149,7 +149,7 @@
 	border-radius:100%;
 	width:100px;
 	height:100px;
-	animation:spin 1s linear infinite
+	animation:loading-spin 1s linear infinite
 }
 .kingbot {
 	font-family:Poppins,sans-serif;
@@ -203,25 +203,23 @@
 	padding-left:210px;
 	max-width:500px
 }
+.legal-base {
+	font-family: Poppins, sans-serif;
+	font-size: 18px;
+	font-weight: 500;
+	text-align: left;
+	opacity: 0;
+	animation: legal-text-slide-in-from-left forwards;
+}
 .legal {
-	font-family:Poppins,sans-serif;
-	font-size:18px;
-	font-weight:500;
-	text-align:left;
-	max-width:80vw;
-	padding-left:12vw;
-	opacity:0;
-	animation:slide-in-legal 1.5s forwards
+	max-width: 80vw;
+	padding-left: 12vw;
+	animation-duration: 1.5s;
 }
 .legallist {
-	font-family:Poppins,sans-serif;
-	font-size:18px;
-	font-weight:500;
-	text-align:left;
-	padding-left:15vw;
-	max-width:75vw;
-	opacity:0;
-	animation:slide-in-legallist 1.75s forwards
+	max-width: 75vw;
+	padding-left: 15vw;
+	animation-duration: 1.75s;
 }
 .foreword {
 	font-family:Poppins,sans-serif;
@@ -337,8 +335,32 @@
 	animation-fill-mode: forwards;
 }
 .slide-from-right {
-	animation-name: slide-in-from-right;
+	animation-name: image-slide-in-from-right;
 }
 .slide-from-left {
-	animation-name: slide-in-from-left;
+	animation-name: image-slide-in-from-left;
+}
+.email-input { 
+	width:100%;
+	padding:15px;
+	margin:10px 0;
+	border:1px solid #ccc;
+	border-radius:5px;
+	box-sizing:border-box;
+	font-size:16px
+}
+.mailing-list-button { 
+	background-color:#fad700;
+	color:#fff;
+	padding:15px;
+	width:100%;
+	font-size:18px;
+	border:none;
+	border-radius:5px;
+	cursor:pointer;
+	font-weight:700;
+	transition:background-color 0.5s
+}
+.mailing-list-button:hover { 
+	background-color:#d2aa00
 }

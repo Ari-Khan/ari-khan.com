@@ -13,10 +13,10 @@ class MailingList extends HTMLElement {
             <h2>Thanks for joining!</h2>
           </div>
 
-          <input type="email" name="email" placeholder="Enter your email..." required>
+          <input type="email" name="email" class="email-input" placeholder="Enter your email..." required>
           <input type="text" name="website" tabindex="-1" autocomplete="off" hidden>
 
-          <button type="submit">Join Mailing List</button>
+          <button type="submit" class="mailing-list-button">Join Mailing List</button>
         </form>
       </div>
     `;

@@ -78,12 +78,12 @@
 }
 .slide-in-text {
 	font-size:clamp(40px,8vw,80px);
-	animation:slide-in 2s forwards;
+	animation:hero-text-slide-in 2s forwards;
 	margin-top:4px
 }
 .slide-in-text-small {
 	font-size:clamp(28px,6vw,56px);
-	animation:slide-in 1.75s forwards
+	animation:hero-text-slide-in 1.5s forwards
 }
 .circular-image {
 	border-radius:50%;
