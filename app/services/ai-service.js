@@ -1,8 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
-
-const client = new GoogleGenAI({
-  apiKey: process.env.GOOGLE_API_KEY
-});
+import dotenv from "dotenv";
+dotenv.config();
 
 const safetySettings = [
   { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
@@ -11,7 +9,11 @@ const safetySettings = [
   { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
 ];
 
-function buildSystemPrompt() {
+const googleGenAIClient = new GoogleGenAI({
+  apiKey: process.env.GOOGLE_API_KEY,
+});
+
+function buildSystemPrompt(prompt) {
   const now = new Date();
 
   const dateOptions = {
@@ -19,7 +21,7 @@ function buildSystemPrompt() {
     weekday: "long",
     month: "long",
     day: "2-digit",
-    year: "numeric"
+    year: "numeric",
   };
 
   const timeOptions = {
@@ -27,7 +29,7 @@ function buildSystemPrompt() {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-    hour12: true
+    hour12: true,
   };
 
   const formattedDate = new Intl.DateTimeFormat("en-US", dateOptions).format(now);
@@ -59,26 +61,19 @@ function buildSystemPrompt() {
     "You are currently talking to a user.",
   ];
 
-  return conditions.join(" ");
+  return conditions.join(" ") + ". Now answer this: " + prompt;
 }
 
 export async function generateAIResponse(prompt, history = []) {
-  const systemPrompt = buildSystemPrompt();
-  const finalPrompt = `${systemPrompt}. Now answer this: ${prompt}`;
-
-  const chat = client.chats.create({
-    model: "gemini-2.0-flash",
+  const chat = googleGenAIClient.chats.create({
+    model: "gemini-2.5-flash",
     temperature: 1.25,
     safetySettings,
-    history: history.map(h => ({
-      role: h.role === "user" ? "user" : "model",
-      parts: [{ text: h.message }]
-    }))
+    history,
   });
 
-  const response = await chat.sendMessage({
-    message: finalPrompt
-  });
+  const systemPrompt = buildSystemPrompt(prompt);
+  const response = await chat.sendMessage({ message: systemPrompt });
 
   return response.text || "";
 }

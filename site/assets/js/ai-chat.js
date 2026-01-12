@@ -42,7 +42,7 @@ function deleteLastMessage() {
         container.removeChild(children[children.length - 1]);
     }
 
-    if (last.role === 'model') {
+    if (last.role === 'bot') {
         pendingBotUndo = true;
 
         if (repromptTimeout) clearTimeout(repromptTimeout);
@@ -91,13 +91,13 @@ async function repromptLastPrompt() {
     container.scrollTop = container.scrollHeight;
 
     try {
-        const response = await fetch('https://ari-khan.vercel.app/content/ai', {
+        const response = await fetch('/content/ai', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 prompt: lastUserMsg.message,
                 history: history.map(h => ({
-                    role: h.role === 'user' ? 'user' : 'model',
+                    role: h.role === 'user' ? 'user' : 'bot',
                     message: h.message
                 }))
             })
@@ -111,7 +111,7 @@ async function repromptLastPrompt() {
 
             const botReply = data.response;
             displayMessage('KingBot', botReply);
-            addToChatHistory('model', botReply);
+            addToChatHistory('bot', botReply);
         } else {
             throw new Error("No response field in result");
         }
@@ -166,12 +166,12 @@ window.sendMessage = async function(event) {
         observer.observe(container, { childList: true });
 
         try {
-            const response = await fetch('https://ari-khan.vercel.app/content/ai', {
+            const response = await fetch('/content/ai', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     prompt: inputText,
-                    history: history.map(h => ({ role: h.role === 'user' ? 'user' : 'model', message: h.message }))
+                    history: history.map(h => ({ role: h.role === 'user' ? 'user' : 'bot', message: h.message }))
                 })
             });
 
@@ -185,7 +185,7 @@ window.sendMessage = async function(event) {
 
                 const botReply = data.response;
                 displayMessage('KingBot', botReply);
-                addToChatHistory('model', botReply);
+                addToChatHistory('bot', botReply);
             }
         } catch (error) {
             console.error("Error:", error);
