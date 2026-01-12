@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
     res.json({ response });
   } catch (err) {
     console.error("AI route error:", err);
-    res.status(500).json({ error: "AI generation failed" });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
