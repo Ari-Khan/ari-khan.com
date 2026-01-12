@@ -64,7 +64,6 @@ function buildSystemPrompt() {
 
 export async function generateAIResponse(prompt, history = []) {
   const systemPrompt = buildSystemPrompt();
-
   const finalPrompt = `${systemPrompt}. Now answer this: ${prompt}`;
 
   const chat = client.chats.create({

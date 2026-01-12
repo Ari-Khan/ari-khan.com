@@ -42,7 +42,7 @@ function deleteLastMessage() {
         container.removeChild(children[children.length - 1]);
     }
 
-    if (last.role === 'bot') {
+    if (last.role === 'model') {
         pendingBotUndo = true;
 
         if (repromptTimeout) clearTimeout(repromptTimeout);
@@ -97,7 +97,7 @@ async function repromptLastPrompt() {
             body: JSON.stringify({
                 prompt: lastUserMsg.message,
                 history: history.map(h => ({
-                    role: h.role === 'user' ? 'user' : 'bot',
+                    role: h.role === 'user' ? 'user' : 'model',
                     message: h.message
                 }))
             })
@@ -111,7 +111,7 @@ async function repromptLastPrompt() {
 
             const botReply = data.response;
             displayMessage('KingBot', botReply);
-            addToChatHistory('bot', botReply);
+            addToChatHistory('model', botReply);
         } else {
             throw new Error("No response field in result");
         }
@@ -171,7 +171,7 @@ window.sendMessage = async function(event) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     prompt: inputText,
-                    history: history.map(h => ({ role: h.role === 'user' ? 'user' : 'bot', message: h.message }))
+                    history: history.map(h => ({ role: h.role === 'user' ? 'user' : 'model', message: h.message }))
                 })
             });
 
@@ -185,7 +185,7 @@ window.sendMessage = async function(event) {
 
                 const botReply = data.response;
                 displayMessage('KingBot', botReply);
-                addToChatHistory('bot', botReply);
+                addToChatHistory('model', botReply);
             }
         } catch (error) {
             console.error("Error:", error);
