@@ -3,33 +3,26 @@
 	font-display:block;
 	src:url(/assets/fonts/poppins/Poppins-Medium-Subset.woff2) format('woff2');
 	font-weight:400;
-	font-style:normal
 }
 @font-face { 
 	font-family:Poppins;
 	font-display:block;
 	src:url(/assets/fonts/poppins/Poppins-Bold-Subset.woff2) format('woff2');
 	font-weight:600;
-	font-style:normal
 }
 @font-face { 
 	font-family:Foldit;
 	font-display:block;
 	src:url(/assets/fonts/foldit/Foldit-VariableFont_wght.woff2) format('woff2');
 	font-weight:650;
-	font-style:normal
 }
 body,html { 
 	margin:0;
-	padding:0;
-	box-sizing:border-box;
-	height:100%;
-	width:100%;
 	overflow-x:hidden;
-	font-family:Poppins,sans-serif
+	font-family:Poppins,sans-serif;
 }
 main {
-	margin-top: 90px;
+	margin-top:90px;
 }
 main.home-page,
 main.projects-page {
@@ -37,32 +30,32 @@ main.projects-page {
 }
 a { 
 	text-decoration:none;
-	color:inherit
+	color:inherit;
+}
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
 }
 ::-webkit-scrollbar { 
-	width:.75vw;
-	height:.75vh
+	width:0.75vw;
+	height:0.75vh;
 }
 ::-webkit-scrollbar-thumb { 
 	background:#ccc;
-	border-radius:6px
+	border-radius:6px;
 }
 ::-webkit-scrollbar-thumb:hover { 
-	background:#aaa
+	background:#aaa;
 }
 ::-webkit-scrollbar-track { 
-	background:#eee
+	background:#eee;
 }
-h2 { 
-	font-family:Poppins,sans-serif;
-	font-weight:600;
-	font-size:24px;
-	color:#000
-}
+
 input[type=email] { 
 	width:100%;
 	padding:15px;
-	font-family:Poppins,sans-serif;
 	margin:10px 0;
 	border:1px solid #ccc;
 	border-radius:5px;
@@ -75,7 +68,6 @@ button {
 	padding:15px;
 	width:100%;
 	font-size:18px;
-	font-family:Poppins,sans-serif;
 	border:none;
 	border-radius:5px;
 	cursor:pointer;
@@ -85,21 +77,15 @@ button {
 button:hover { 
 	background-color:#d2aa00
 }
-#message { 
-	color:#33ff57;
-	font-weight:700;
-	font-family:Poppins,sans-serif;
-	margin-top:15px
-}
 @keyframes spin { 
 	0%{transform:rotate(0)}
 	100%{transform:rotate(360deg)}
 }
-@keyframes slideIn { 
+@keyframes slide-in-from-right { 
 	0%{right:-50%}
 	100%{right:70px}
 }
-@keyframes slideIn2 { 
+@keyframes slide-in-from-left { 
 	0%{left:-50%}
 	100%{left:40px}
 }
@@ -133,27 +119,9 @@ button:hover {
 		opacity:1
 	}
 }
-@keyframes scroll-gallery { 
-	from{transform:translateX(0)}
-	to{transform:translateX(-100%)}
-}
-@media (orientation:portrait) { 
-	.text-box{
-		width:75%
-	}
-}
-@media (orientation:portrait) { 
-	.outer-box{
-		width:75%
-	}
-}
-@media (orientation:portrait) { 
-	.input-box{
-		width:75%
-	}
-}
-@media (orientation:portrait) { 
-	.image-outer-box{
-		width:75%
-	}
+@media (orientation:portrait){
+	.text-box{width:75%}
+	.outer-box{width:75%}
+	.input-box{width:75%}
+	.image-outer-box{width:75%}
 }
