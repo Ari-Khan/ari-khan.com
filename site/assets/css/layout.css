@@ -153,23 +153,21 @@ footer p{
 	pointer-events:none
 }
 .scrolling-gallery{
-	display:flex;
-	width:auto;
 	overflow:hidden;
-	align-items:center
+	width:100%;
 }
-.gallery-content,.gallery-content2{
+.scrolling-track{
 	display:flex;
-	width:auto;
-	animation:scroll-gallery 35s linear infinite;
-	align-items:center
+	align-items:center;
+	gap:10px;
+	will-change:transform;
 }
-.gallery-content img,.gallery-content video,.gallery-content2 img,.gallery-content2 video{
+.scrolling-track img,
+.scrolling-track video{
 	height:calc(min(60vw,300px));
 	width:auto;
-	margin-right:10px;
 	object-fit:cover;
-	flex-shrink:0
+	flex-shrink:0;
 }
 .outer-box{
 	font-family:Poppins,sans-serif;
