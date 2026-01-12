@@ -1,7 +1,12 @@
 class ScrollingGallery extends HTMLElement {
 	constructor(){
 		super()
-		this.speed = 400
+		this.speed = 500
+
+		this.currentSpeed = 0
+		this.targetSpeed = this.speed
+		this.accel = 1500
+
 		this.paused = false
 		this.offset = 0
 	}
@@ -67,8 +72,11 @@ class ScrollingGallery extends HTMLElement {
 			const dt = (t - last) / 1000
 			last = t
 
-			if (!this.paused) {
-				this.offset -= this.speed * dt
+			const diff = this.targetSpeed - this.currentSpeed
+			this.currentSpeed += diff * Math.min(1, this.accel * dt / this.speed)
+
+			if (Math.abs(this.currentSpeed) > 0.1) {
+				this.offset -= this.currentSpeed * dt
 				this.recycle()
 				this.track.style.transform = `translateX(${this.offset}px)`
 			}
@@ -94,6 +102,7 @@ class ScrollingGallery extends HTMLElement {
 
 	toggle(){
 		this.paused = !this.paused
+		this.targetSpeed = this.paused ? 0 : this.speed
 	}
 }
 
