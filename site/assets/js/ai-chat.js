@@ -23,9 +23,7 @@ function displayMessage(role, message) {
 
 function clearMessages() {
     localStorage.removeItem('kingbot-history');
-
-    const container = document.getElementById('scrollBox');
-    container.innerHTML = '';
+    document.getElementById('scrollBox').innerHTML = '';
 }
 
 function deleteLastMessage() {
@@ -52,36 +50,15 @@ function deleteLastMessage() {
                 repromptLastPrompt();
             }
         }, 2000);
-    } else if (last.role === 'user') {
-        if (!thinkingElem || !container.contains(thinkingElem)) {
-            if (repromptTimeout) {
-                clearTimeout(repromptTimeout);
-                repromptTimeout = null;
-            }
-            pendingBotUndo = false;
-        }
-    }
-
-    if (thinkingElem) {
-        const observer = new MutationObserver(() => {
-            if (!container.contains(thinkingElem)) {
-                if (repromptTimeout) {
-                    clearTimeout(repromptTimeout);
-                    repromptTimeout = null;
-                }
-                pendingBotUndo = false;
-                observer.disconnect();
-            }
-        });
-        observer.observe(container, { childList: true });
+    } else {
+        if (repromptTimeout) clearTimeout(repromptTimeout);
+        pendingBotUndo = false;
     }
 }
-
 
 async function repromptLastPrompt() {
     const history = getChatHistory();
     const lastUserMsg = [...history].reverse().find(msg => msg.role === 'user');
-
     if (!lastUserMsg) return;
 
     const container = document.getElementById('scrollBox');
@@ -109,92 +86,81 @@ async function repromptLastPrompt() {
             thinkingElem.remove();
             thinkingElem = null;
 
-            const botReply = data.response;
-            displayMessage('KingBot', botReply);
-            addToChatHistory('bot', botReply);
-        } else {
-            throw new Error("No response field in result");
+            displayMessage('KingBot', data.response);
+            addToChatHistory('bot', data.response);
         }
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Reprompt error:", error);
         if (thinkingElem) {
             thinkingElem.remove();
             thinkingElem = null;
         }
-        displayMessage('KingBot', "Error: Could not get a response from KingBot.");
     }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    const history = getChatHistory();
-    history.forEach(msg => {
+    getChatHistory().forEach(msg => {
         displayMessage(msg.role === 'user' ? 'You' : 'KingBot', msg.message);
     });
 });
 
-window.sendMessage = async function(event) {
-    if (event.key === 'Enter') {
-        const inputBox = document.getElementById('inputBox');
-        const inputText = inputBox.value.trim();
-        if (inputText === '') return;
+window.sendMessage = async function (event) {
+    if (event.key !== 'Enter') return;
 
-        displayMessage('You', inputText);
-        addToChatHistory('user', inputText);
-        inputBox.value = '';
+    const inputBox = document.getElementById('inputBox');
+    const inputText = inputBox.value.trim();
+    if (!inputText) return;
 
-        const container = document.getElementById('scrollBox');
-        thinkingElem = document.createElement('div');
-        thinkingElem.innerHTML = `<strong>KingBot:</strong> <em>...</em><br><br>`;
-        container.appendChild(thinkingElem);
-        container.scrollTop = container.scrollHeight;
+    displayMessage('You', inputText);
+    addToChatHistory('user', inputText);
+    inputBox.value = '';
 
-        const history = getChatHistory();
-        let cancelled = false;
+    const container = document.getElementById('scrollBox');
+    thinkingElem = document.createElement('div');
+    thinkingElem.innerHTML = `<strong>KingBot:</strong> <em>...</em><br><br>`;
+    container.appendChild(thinkingElem);
+    container.scrollTop = container.scrollHeight;
 
-        const observer = new MutationObserver(() => {
-            if (!container.contains(thinkingElem)) {
-                cancelled = true;
-                observer.disconnect();
+    const history = getChatHistory();
+    let cancelled = false;
 
-                if (repromptTimeout) {
-                    clearTimeout(repromptTimeout);
-                    repromptTimeout = null;
-                }
-                pendingBotUndo = false;
-            }
+    const observer = new MutationObserver(() => {
+        if (!container.contains(thinkingElem)) {
+            cancelled = true;
+            observer.disconnect();
+            pendingBotUndo = false;
+            if (repromptTimeout) clearTimeout(repromptTimeout);
+        }
+    });
+    observer.observe(container, { childList: true });
+
+    try {
+        const response = await fetch('/content/ai', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                prompt: inputText,
+                history: history.map(h => ({
+                    role: h.role === 'user' ? 'user' : 'bot',
+                    message: h.message
+                }))
+            })
         });
-        observer.observe(container, { childList: true });
 
-        try {
-            const response = await fetch('/content/ai', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    prompt: inputText,
-                    history: history.map(h => ({ role: h.role === 'user' ? 'user' : 'bot', message: h.message }))
-                })
-            });
+        const data = await response.json();
 
-            const data = await response.json();
+        if (!cancelled && data.response) {
+            thinkingElem.remove();
+            thinkingElem = null;
 
-            if (!cancelled && data.response) {
-                if (thinkingElem) {
-                    thinkingElem.remove();
-                    thinkingElem = null;
-                }
-
-                const botReply = data.response;
-                displayMessage('KingBot', botReply);
-                addToChatHistory('bot', botReply);
-            }
-        } catch (error) {
-            console.error("Error:", error);
-
-            if (!cancelled && thinkingElem) {
-                thinkingElem.remove();
-                thinkingElem = null;
-                displayMessage('KingBot', "Error: Could not get a response from KingBot.");
-            }
+            displayMessage('KingBot', data.response);
+            addToChatHistory('bot', data.response);
+        }
+    } catch (error) {
+        console.error("Send error:", error);
+        if (!cancelled && thinkingElem) {
+            thinkingElem.remove();
+            thinkingElem = null;
         }
     }
 };
