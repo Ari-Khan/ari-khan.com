@@ -21,7 +21,7 @@ class Footer extends HTMLElement {
         </div>
 
         <div class="thin-line"></div>
-        <p>&copy; 2026 Ari Khan. All rights reserved. | <a href="https://creativecommons.org/licenses/by-nc/4.0/" class="hover-underline">CC BY-NC 4.0</a></p>
+        <p>&copy; 2026 Ari Khan. All rights reserved. | <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="hover-underline">CC BY-NC-SA 4.0</a></p>
       </footer>
     `;
   }
