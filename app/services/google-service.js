@@ -66,7 +66,7 @@ function buildSystemPrompt(prompt) {
 
 export async function generateAIResponse(prompt, history = []) {
   const chat = googleGenAIClient.chats.create({
-    model: "gemini-2.5-flash",
+    model: "gemini-3.0-flash-preview",
     temperature: 1.25,
     safetySettings,
     history,
