@@ -1,0 +1,81 @@
+@font-face { 
+	font-family:GoogleSansFlex;
+	font-display:block;
+	src:url(/fonts/google-sans-flex.ttf) format('woff2-variations');
+	font-weight:100 900;
+}
+
+body,html { 
+	margin:0;
+	overflow-x:hidden;
+	font-family:GoogleSansFlex,sans-serif;
+}
+main {
+	margin-top:90px;
+}
+main.home-page,
+main.projects-page {
+	margin-top:0;
+}
+a { 
+	text-decoration:none;
+	color:inherit;
+}
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
+}
+::-webkit-scrollbar { 
+	width:0.75vw;
+	height:0.75vh;
+}
+::-webkit-scrollbar-thumb { 
+	background:#ccc;
+	border-radius:6px;
+}
+::-webkit-scrollbar-thumb:hover { 
+	background:#aaa;
+}
+::-webkit-scrollbar-track { 
+	background:#eee;
+}
+@keyframes loading-spin { 
+	0%{transform:rotate(0)}
+	100%{transform:rotate(360deg)}
+}
+@keyframes image-slide-in-from-right { 
+	0%{right:-50%}
+	100%{right:70px}
+}
+@keyframes image-slide-in-from-left { 
+	0%{left:-50%}
+	100%{left:40px}
+}
+@keyframes hero-text-slide-in { 
+	from{
+		transform:translateX(-130%);
+		opacity:0;
+	}
+	to{
+		transform:translateX(calc(max(30%,50px)));
+		opacity:1;
+	}
+}
+@keyframes legal-text-slide-in-from-left {
+	from {
+		transform: translateX(-100px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+@media (orientation:portrait){
+	.text-box{width:75%}
+	.outer-box{width:75%}
+	.input-box{width:75%}
+	.image-outer-box{width:75%}
+}

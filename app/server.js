@@ -16,9 +16,8 @@ app.use(bodyParser.json());
 
 app.use("/content/ai", aiRoutes);
 
-app.use(express.static(path.join(__dirname, "../public")));
-app.use(express.static(path.join(__dirname, "../site")));
-app.use(express.static(path.join(__dirname, "../site/pages")));
+// Serve all static files from public folder
+app.use(express.static(path.resolve(__dirname, "../public")));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

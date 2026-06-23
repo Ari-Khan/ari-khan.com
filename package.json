@@ -4,10 +4,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app/server.js",
-    "dev": "nodemon app/server.js",
-    "build": "echo \"No build step required for Express\""
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "keywords": [
     "website",
@@ -20,6 +19,7 @@
   "description": "ari-khan.com website program.",
   "dependencies": {
     "@google/genai": "^1.38.0",
+    "astro": "^6.4.2",
     "cors": "^2.8.6",
     "dotenv": "^17.2.1",
     "express": "^4.22.1",
