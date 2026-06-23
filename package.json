@@ -1,6 +1,6 @@
 {
   "name": "ari-khan.com",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "server.js",
   "type": "module",
   "scripts": {
