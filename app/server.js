@@ -16,10 +16,11 @@ app.use(bodyParser.json());
 
 app.use("/content/ai", aiRoutes);
 
-// Serve all static files from public folder
+app.use(express.static(path.resolve(__dirname, "../dist")));
 app.use(express.static(path.resolve(__dirname, "../public")));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../dist/index.html"));
 });
+
+export default app;
