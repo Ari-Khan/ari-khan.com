@@ -25,12 +25,13 @@ nav ul li a{
 	color:#000;
 	padding:7px 40px;
 	font-size:20px;
-	opacity:.8;
+	opacity:.7;
 	margin-top:4px;
 	font-weight:500;
+	transition:opacity .2s ease;
 }
 nav ul li a:hover{
-	text-shadow: 0 0 1px currentColor;
+	opacity:1;
 }
 footer{
 	background-color:#1973fa;

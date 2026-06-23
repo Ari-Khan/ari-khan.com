@@ -10,6 +10,12 @@
 	src:url(/fonts/foldit.ttf) format('truetype');
 	font-weight:100 900;
 }
+@font-face {
+	font-family:BarlowCondensed;
+	font-display:block;
+	src:url(/fonts/barlow-condensed.ttf) format('truetype');
+	font-weight:100 900;
+}
 
 body,html { 
 	margin:0;
