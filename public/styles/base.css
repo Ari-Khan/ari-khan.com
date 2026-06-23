@@ -4,6 +4,12 @@
 	src:url(/fonts/google-sans-flex.ttf) format('woff2-variations');
 	font-weight:100 900;
 }
+@font-face {
+	font-family:Foldit;
+	font-display:block;
+	src:url(/fonts/foldit.ttf) format('truetype');
+	font-weight:100 900;
+}
 
 body,html { 
 	margin:0;

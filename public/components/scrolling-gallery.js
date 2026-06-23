@@ -12,38 +12,29 @@ class ScrollingGallery extends HTMLElement {
 	}
 
 	connectedCallback(){
-		this.innerHTML = `
-			<div class="scrolling-gallery">
-				<div class="scrolling-track">
-					${this.items()}
-				</div>
-			</div>
-		`
-		this.track = this.querySelector('.scrolling-track')
-		this.waitForMedia()
-	}
-
-	items(){
-		return `
-			<img src="/images/gallery/gallery-1.webp">
-			<img src="/images/gallery/gallery-2.webp">
-			<img src="/images/gallery/gallery-3.webp">
-			<img src="/images/gallery/gallery-4.webp">
-			<video autoplay loop muted>
-				<source src="/images/gallery/video-1.mp4" type="video/mp4">
-			</video>
-			<img src="/images/gallery/gallery-5.webp">
-			<img src="/images/gallery/gallery-6.webp">
-			<img src="/images/gallery/gallery-7.webp">
-			<img src="/images/gallery/gallery-8.webp">
-			<img src="/images/gallery/gallery-9.webp">
-			<video autoplay loop muted>
-				<source src="/images/gallery/video-2.mp4" type="video/mp4">
-			</video>
-			<img src="/images/gallery/gallery-10.webp">
-			<img src="/images/gallery/gallery-11.webp">
-			<img src="/images/gallery/gallery-12.webp">
-		`
+		fetch('/images/gallery/manifest.json')
+			.then(res => {
+				if (!res.ok) throw new Error('Failed to load gallery manifest')
+				return res.json()
+			})
+			.then(items => {
+				this.innerHTML = `
+					<div class="scrolling-gallery">
+						<div class="scrolling-track">
+							${items.map(item =>
+								item.type === 'video'
+									? `<video autoplay loop muted playsinline><source src="${item.src}" type="video/mp4"></video>`
+									: `<img src="${item.src}">`
+							).join('')}
+						</div>
+					</div>
+				`
+				this.track = this.querySelector('.scrolling-track')
+				this.waitForMedia()
+			})
+			.catch(err => {
+				console.error('Gallery error:', err)
+			})
 	}
 
 	waitForMedia(){
