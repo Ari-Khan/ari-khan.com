@@ -5,8 +5,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const galleryDir = path.resolve(__dirname, '../../public/images/gallery');
-const outputFile = path.resolve(__dirname, '../../public/images/gallery/manifest.json');
+const galleryDir = path.resolve(__dirname, '../public/images/gallery');
+const outputFile = path.resolve(__dirname, '../public/images/gallery/manifest.json');
 
 const files = fs.readdirSync(galleryDir);
 
