@@ -4,9 +4,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "node src/scripts/build-gallery.js && astro dev",
-    "build": "node src/scripts/build-gallery.js && astro build",
-    "vercel-build": "node src/scripts/build-gallery.js && astro build",
+    "dev": "node scripts/build-gallery.js && astro dev",
+    "build": "node scripts/build-gallery.js && astro build",
+    "vercel-build": "node scripts/build-gallery.js && astro build",
     "preview": "astro preview"
   },
   "keywords": [
