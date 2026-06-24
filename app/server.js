@@ -19,7 +19,7 @@ app.use("/content/ai", aiRoutes);
 app.use(express.static(path.resolve(__dirname, "../dist")));
 app.use(express.static(path.resolve(__dirname, "../public")));
 
-app.get("*", (req, res) => {
+app.get("/{*path}", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../dist/index.html"));
 });
 
