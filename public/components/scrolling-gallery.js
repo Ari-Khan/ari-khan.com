@@ -12,6 +12,10 @@ class ScrollingGallery extends HTMLElement {
 	}
 
 	connectedCallback(){
+		document.addEventListener('visibilitychange', () => {
+			this.targetSpeed = document.hidden ? 0 : (this.paused ? 0 : this.speed)
+		})
+
 		fetch('/images/gallery/manifest.json')
 			.then(res => {
 				if (!res.ok) throw new Error('Failed to load gallery manifest')
@@ -79,7 +83,7 @@ class ScrollingGallery extends HTMLElement {
 
 		const step = (t) => {
 			if (!last) last = t
-			const dt = (t - last) / 1000
+			const dt = Math.min((t - last) / 1000, 0.1)
 			last = t
 
 			const diff = this.targetSpeed - this.currentSpeed
