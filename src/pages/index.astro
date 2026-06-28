@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Ari Khan"
+  description="Hey there! I'm Ari Khan, and I'm thrilled you're here."
+  canonical="https://ari-khan.com/"
+>
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/images/profile/gumballs.webp" type="image/webp" fetchpriority="high" />
+    <script>
+      class ScrollingGallery extends HTMLElement {
+        constructor(){
+          super()
+          this.speed = 500
+          this.currentSpeed = 0
+          this.targetSpeed = this.speed
+          this.accel = 1500
+          this.paused = false
+          this.offset = 0
+        }
+        connectedCallback(){
+          document.addEventListener('visibilitychange', () => {
+            this.targetSpeed = document.hidden ? 0 : (this.paused ? 0 : this.speed)
+          })
+          fetch('/images/gallery/manifest.json')
+            .then(res => {
+              if (!res.ok) throw new Error('Failed to load gallery manifest')
+              return res.json()
+            })
+            .then(items => {
+              this.innerHTML = `
+                <div class="scrolling-gallery">
+                  <div class="scrolling-track">
+                    ${items.map(item =>
+                      item.type === 'video'
+                        ? '<video autoplay loop muted playsinline><source src="' + item.src + '" type="video/mp4"></video>'
+                        : '<img src="' + item.src + '">'
+                    ).join('')}
+                  </div>
+                </div>
+              `
+              this.track = this.querySelector('.scrolling-track')
+              this.waitForMedia()
+            })
+            .catch(err => console.error('Gallery error:', err))
+        }
+        waitForMedia(){
+          const media = this.querySelectorAll('img, video')
+          let loaded = 0
+          const done = () => {
+            loaded++
+            if (loaded === media.length) this.start()
+          }
+          const timeout = setTimeout(() => {
+            if (loaded < media.length) {
+              console.warn('Gallery started with ' + loaded + '/' + media.length + ' items loaded')
+              this.start()
+            }
+          }, 3000)
+          media.forEach(el => {
+            if ((el.tagName === 'IMG' && el.complete) || (el.tagName === 'VIDEO' && el.readyState >= 2)) {
+              done()
+            } else {
+              el.addEventListener('load', () => { clearTimeout(timeout); done() }, { once: true })
+              el.addEventListener('loadeddata', () => { clearTimeout(timeout); done() }, { once: true })
+              el.addEventListener('error', () => { clearTimeout(timeout); done() }, { once: true })
+            }
+          })
+        }
+        start(){
+          let last = 0
+          const step = (t) => {
+            if (!last) last = t
+            const dt = Math.min((t - last) / 1000, 0.1)
+            last = t
+            const diff = this.targetSpeed - this.currentSpeed
+            this.currentSpeed += diff * Math.min(1, this.accel * dt / this.speed)
+            if (Math.abs(this.currentSpeed) > 0.1) {
+              this.offset -= this.currentSpeed * dt
+              this.recycle()
+              this.track.style.transform = 'translateX(' + this.offset + 'px)'
+            }
+            requestAnimationFrame(step)
+          }
+          requestAnimationFrame(step)
+        }
+        recycle(){
+          const first = this.track.firstElementChild
+          if (!first) return
+          const firstWidth = first.getBoundingClientRect().width
+          const gap = parseFloat(getComputedStyle(this.track).gap) || 0
+          if (-this.offset >= firstWidth + gap) {
+            this.offset += firstWidth + gap
+            this.track.appendChild(first)
+          }
+        }
+        toggle(){
+          this.paused = !this.paused
+          this.targetSpeed = this.paused ? 0 : this.speed
+        }
+      }
+      customElements.define('scrolling-gallery', ScrollingGallery)
+      document.addEventListener('keydown', e => {
+        if (e.code === 'Space') {
+          e.preventDefault()
+          document.querySelectorAll('scrolling-gallery').forEach(g => g.toggle())
+        }
+      })
+    </script>
+    <script>
+      class MailingList extends HTMLElement {
+        connectedCallback() {
+          this.innerHTML = `
+            <div class="mailcontainer">
+              <form class="gform" method="POST" action="https://script.google.com/macros/s/AKfycbw1l0BfyMcO0Hojk2X6SzXeQ9dIz9uZlnvVPpNhZi3TWb4fjpbglKpGDEbligQE-wvE/exec">
+                <h2 class="mailinglistheader">Join My Mailing List!</h2>
+                <div class="thankyou_message" hidden>
+                  <h2>Thanks for joining!</h2>
+                </div>
+                <input type="email" name="email" class="email-input" placeholder="Enter your email..." required>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" hidden>
+                <button type="submit" class="mailing-list-button">Join Mailing List</button>
+              </form>
+            </div>
+          `
+        }
+      }
+      customElements.define('mailing-list', MailingList)
+    </script>
+    <script>
+      (function() {
+        function getFormData(form) {
+          const elements = form.elements;
+          const formData = Array.from(elements)
+            .filter(el => el.name && el.name !== 'website')
+            .reduce((acc, el) => (acc[el.name] = el.value, acc), {});
+          const honeypot = elements['website']?.value;
+          return { data: formData, honeypot };
+        }
+        async function handleFormSubmit(event) {
+          event.preventDefault();
+          const form = event.target;
+          const { data, honeypot } = getFormData(form);
+          if (honeypot) return false;
+          form.querySelector('.thankyou_message')?.style.setProperty('display', 'block');
+          form.querySelector('.mailinglistheader')?.style.setProperty('display', 'none');
+          [...form.querySelectorAll('button')].forEach(btn => btn.disabled = true);
+          try {
+            const response = await fetch(form.action, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: new URLSearchParams(data)
+            });
+            if (response.ok) {
+              form.reset();
+            } else {
+              console.error('Form submission failed:', response.statusText);
+              form.querySelector('.error_message')?.style.setProperty('display', 'block');
+            }
+          } catch (err) {
+            console.error('Form submission error:', err);
+            form.querySelector('.error_message')?.style.setProperty('display', 'block');
+          }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('form.gform').forEach(f => f.addEventListener('submit', handleFormSubmit));
+        });
+      })();
+    </script>
+  </Fragment>
+
+  <main class="home-page">
+    <section class="image-container">
+      <img src="/images/profile/gumballs.webp" alt="Backdrop Image" width="629" height="1350" fetchpriority="high" />
+      <div class="text-overlay">
+        <div class="slide-in-text-small">A place for</div>
+        <div class="slide-in-text">Innovation.</div>
+      </div>
+    </section>
+
+    <section>
+      <h1 class="header">Foreword</h1>
+      <p class="foreword">
+        Hey there! I'm <strong>Ari Khan</strong>, and I'm thrilled you're here.<br><br>
+        This site is a space where I share my journey, projects, interests, and everything that fuels my curiosity.
+        Whether it's about technology, engineering, school projects, or personal growth, you'll find bits and pieces
+        of what I love and care about. I believe in stepping out of comfort zones, learning from every experience,
+        and constantly growing and starting new projects.<br><br>
+        Feel free to explore, drop a message, or just say hi.<br><br>
+        — Ari Khan
+      </p>
+    </section>
+
+    <section>
+      <h1 class="header">Projects Gallery</h1>
+      <scrolling-gallery></scrolling-gallery>
+    </section>
+
+    <mailing-list></mailing-list>
+  </main>
+</BaseLayout>

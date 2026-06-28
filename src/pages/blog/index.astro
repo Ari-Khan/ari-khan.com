@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Blog"
+  description="Articles and writing by Ari Khan."
+  canonical="https://ari-khan.com/blog"
+>
+  <Fragment slot="head">
+    <script>
+      class MailingList extends HTMLElement {
+        connectedCallback() {
+          this.innerHTML = `
+            <div class="mailcontainer">
+              <form class="gform" method="POST" action="https://script.google.com/macros/s/AKfycbw1l0BfyMcO0Hojk2X6SzXeQ9dIz9uZlnvVPpNhZi3TWb4fjpbglKpGDEbligQE-wvE/exec">
+                <h2 class="mailinglistheader">Join My Mailing List!</h2>
+                <div class="thankyou_message" hidden>
+                  <h2>Thanks for joining!</h2>
+                </div>
+                <input type="email" name="email" class="email-input" placeholder="Enter your email..." required>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" hidden>
+                <button type="submit" class="mailing-list-button">Join Mailing List</button>
+              </form>
+            </div>
+          `
+        }
+      }
+      customElements.define('mailing-list', MailingList)
+    </script>
+  </Fragment>
+
+  <main>
+    <section>
+      <h1 class="header">Blog</h1>
+    </section>
+
+    <section class="blog-list">
+      <article class="blog-entry">
+        <h2>
+          <a href="../blog/2025/the-best-free-tools-for-student-developers-in-2025/">
+            The Best Free Tools for Student Developers in 2025
+          </a>
+        </h2>
+
+        <div class="meta">
+          <time datetime="2025-05-30">May 30, 2025</time> •
+          <span>Ari Khan</span> •
+          <span>3 min read</span> •
+          <span class="topics">Tools, Student, Developer</span>
+        </div>
+
+        <p class="excerpt">
+          If you're a high school student interested in software development, design, or tech in general, you don't need to wait until college to start building cool projects...
+        </p>
+      </article>
+    </section>
+
+    <mailing-list></mailing-list>
+  </main>
+</BaseLayout>
